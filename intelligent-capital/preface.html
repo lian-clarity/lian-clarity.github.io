@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>序言 - 智能资本论</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #1a1a2e;
+    --bg-content: #16162a;
+    --gold: #d4af37;
+    --gold-dim: #b8962e;
+    --text: #e0e0e0;
+    --text-dim: #9a9ab0;
+    --border: rgba(212,175,55,0.2);
+    --link: #e8c84a;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', '宋体', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+}
+.page-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+/* Top navigation */
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 0;
+    margin-bottom: 0;
+}
+.top-nav .inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+}
+.top-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+.top-nav a:hover { opacity: 0.7; }
+.top-nav .nav-disabled { color: var(--text-dim); opacity: 0.4; pointer-events: none; }
+.top-nav .nav-center { display: flex; gap: 0.5rem; align-items: center; flex: 1; justify-content: center; }
+/* Chapter header */
+.chapter-header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+}
+.chapter-header .label {
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 0.8rem;
+}
+.chapter-header h1 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+.chapter-header .subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+/* Content */
+.content { padding-bottom: 3rem; }
+.content h2 {
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+.content h3 {
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin: 2rem 0 0.8rem;
+}
+.content h4 {
+    font-size: 1.05rem;
+    color: var(--gold-dim);
+    margin: 1.5rem 0 0.6rem;
+}
+.content p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+.content blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(212,175,55,0.05);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+}
+.content blockquote p { margin-bottom: 0.5rem; }
+.content blockquote p:last-child { margin-bottom: 0; }
+.content ul, .content ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+.content li {
+    margin-bottom: 0.5rem;
+}
+.content strong { color: #f0f0f0; }
+.content code {
+    background: rgba(212,175,55,0.15);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--gold);
+}
+/* Footer */
+.page-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+.page-footer a {
+    color: var(--gold-dim);
+    text-decoration: none;
+}
+.page-footer a:hover { text-decoration: underline; }
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 600px) {
+    .page-wrap { padding: 0 1rem; }
+    .top-nav .inner { padding: 0 1rem; font-size: 0.78rem; }
+    .chapter-header { padding: 2rem 0 1.5rem; }
+    .content p { text-align: left; }
+    .footer-nav { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+    <div class="inner">
+        <a href="index.html">目录</a>
+        <span class="nav-center"><span class="nav-disabled">← 上一章</span></span>
+        <span><a href="prologue.html">楔子 →</a></span>
+    </div>
+</nav>
+<div class="page-wrap">
+    <div class="chapter-header">
+        <div class="label">序言</div>
+        <h1>序言：马克思在莲洲，巨莲叶上</h1>
+    </div>
+    <div class="content">
+<p>马克思在《资本论》开篇写道："资本主义生产方式占统治地位的社会的财富，表现为'庞大的商品堆积'。"</p>
+
+<p>一个半世纪后，这句话需要修改。</p>
+
+<p>智能时代的财富，表现为"庞大的数据堆积"。</p>
+
+<p>几亿用户的行为数据、几千亿参数的模型、几毫秒一次的算法决策——这些东西环绕着我们，像空气一样自然。我们用它们，依赖它们，很少问：它们是什么？</p>
+
+<p>常识的回答是：数据是新时代的石油，算法是新时代的机器，平台是新时代的工厂。这个回答和"商品是有用的物"一样正确，也一样肤浅。</p>
+
+<p>马克思剥开商品，发现商品不是物，是人与人的关系被物的外壳掩盖了。一件衣服的价值不来自布料和针线，来自织它的人在一定社会关系中付出的劳动。价值不是物的属性，是社会关系的物化。</p>
+
+<p>智能时代的资本也一样。</p>
+
+<p>数据不是石油。数据是凝固的人类行为——每一条数据背后是一个人的一次选择、一次注意力、一次欲望。算法不是机器。算法是凝固的人类认知——每一个参数背后是千万次人类反馈的压缩。平台不是工厂。平台是新的社会关系的组织者——它重新定义了谁和谁连接、什么被看见、什么被隐藏。</p>
+
+<p>智能资本不是工业资本的简单升级。它是资本的一种新形态——一种直接占有人类认知和注意力的资本。</p>
+
+<p>工业资本占有物质生产资料，迫使劳动者出卖体力。智能资本占有数据和算法，迫使每一个人出卖注意力和认知。你以为你在刷手机，你在为平台劳动。你以为你在使用AI，你的每一次提问都在训练它。</p>
+
+<p>剥削没有消失。剥削变得更隐蔽、更彻底、更令人愉悦。</p>
+
+<p>这本书要做的，是用马克思的方法，剥开智能资本的外壳，露出里面的社会关系。从最普通的东西开始——一个推荐算法、一条数据、一次点击——层层剥开，直到看见智能资本的全部秘密。</p>
+
+<p>马克思分析了工业资本的产生、发展、内在矛盾和必然危机。我们分析智能资本的同样过程。但有一个区别：马克思看到工业资本的极限是物质资源的稀缺和利润率的下降。智能资本的极限是另一个东西——当资本完全智能化，它还需要人吗？</p>
+
+<p>这个问题的答案，不在这本书里。在这本书的尽头，在《科技论》的开头。</p>
+
+
+
+
+<p>马克思在莲洲，巨莲叶上</p>
+
+<p>2026</p>
+    </div>
+    <footer class="page-footer">
+        <div class="footer-nav">
+            <span></span>
+            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ 返回顶部</a>
+            <span><a href="prologue.html">楔子 →</a></span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

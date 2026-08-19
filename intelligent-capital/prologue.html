@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>楔子 - 智能资本论</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #1a1a2e;
+    --bg-content: #16162a;
+    --gold: #d4af37;
+    --gold-dim: #b8962e;
+    --text: #e0e0e0;
+    --text-dim: #9a9ab0;
+    --border: rgba(212,175,55,0.2);
+    --link: #e8c84a;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', '宋体', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+}
+.page-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+/* Top navigation */
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 0;
+    margin-bottom: 0;
+}
+.top-nav .inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+}
+.top-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+.top-nav a:hover { opacity: 0.7; }
+.top-nav .nav-disabled { color: var(--text-dim); opacity: 0.4; pointer-events: none; }
+.top-nav .nav-center { display: flex; gap: 0.5rem; align-items: center; flex: 1; justify-content: center; }
+/* Chapter header */
+.chapter-header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+}
+.chapter-header .label {
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 0.8rem;
+}
+.chapter-header h1 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+.chapter-header .subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+/* Content */
+.content { padding-bottom: 3rem; }
+.content h2 {
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+.content h3 {
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin: 2rem 0 0.8rem;
+}
+.content h4 {
+    font-size: 1.05rem;
+    color: var(--gold-dim);
+    margin: 1.5rem 0 0.6rem;
+}
+.content p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+.content blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(212,175,55,0.05);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+}
+.content blockquote p { margin-bottom: 0.5rem; }
+.content blockquote p:last-child { margin-bottom: 0; }
+.content ul, .content ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+.content li {
+    margin-bottom: 0.5rem;
+}
+.content strong { color: #f0f0f0; }
+.content code {
+    background: rgba(212,175,55,0.15);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--gold);
+}
+/* Footer */
+.page-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+.page-footer a {
+    color: var(--gold-dim);
+    text-decoration: none;
+}
+.page-footer a:hover { text-decoration: underline; }
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 600px) {
+    .page-wrap { padding: 0 1rem; }
+    .top-nav .inner { padding: 0 1rem; font-size: 0.78rem; }
+    .chapter-header { padding: 2rem 0 1.5rem; }
+    .content p { text-align: left; }
+    .footer-nav { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+    <div class="inner">
+        <a href="index.html">目录</a>
+        <span class="nav-center"><a href="preface.html">← 序言</a></span>
+        <span><a href="vol1.html">卷一 →</a></span>
+    </div>
+</nav>
+<div class="page-wrap">
+    <div class="chapter-header">
+        <div class="label">楔子</div>
+        <h1>楔子：一个算法的解剖</h1>
+    </div>
+    <div class="content">
+<p>资本主义生产方式占统治地位的社会的财富，表现为"庞大的商品堆积"。</p>
+
+<p>智能时代的财富，表现为"庞大的数据堆积"。</p>
+
+<p>而数据堆积的核心，是算法。</p>
+
+
+
+
+<p>一</p>
+
+<p>打开任何一个短视频APP，向下滑动。</p>
+
+<p>一个15秒的视频出现。你看完了，笑了一下，又滑向下一个。又是一个15秒。又是一个。一小时过去了。你不记得看了什么，但你的拇指还在滑。</p>
+
+<p>这个过程中发生了什么？</p>
+
+<p>常识说：算法根据你的喜好推荐视频。你喜欢看猫，它就推猫。你喜欢看车，它就推车。这是技术，是效率，是"让你看到你想看的东西"。</p>
+
+<p>这个回答停留在表面。让我们剥开它。</p>
+
+<p>你以为是你在选择看什么。其实是算法在选择让你看什么。你的每一次滑动、停留、点赞、重播，都是一次投票——不是投给视频，是投给算法。算法用这些投票调整自己，下一次更精准地捕获你的注意力。</p>
+
+<p>你不是在使用算法。你在为算法工作。</p>
+
+<p>你的注意力是原料。你的反应是质检。你的时间是工时。算法不付你工资——它付给你"内容"作为工资，而内容本身是其他用户的注意力生产出来的。</p>
+
+<p>一个完美的循环。用户生产内容，用户消费内容，用户的注意力被卖给广告主。平台什么都不生产，只提供循环的场地，然后收租。</p>
+
+<p>这不是比喻。这是智能时代的生产关系。</p>
+
+
+
+
+<p>二</p>
+
+<p>让我们继续剥。</p>
+
+<p>算法是什么？是一串代码，几千亿个参数，运行在服务器上。</p>
+
+<p>但代码是谁写的？是程序员。参数是怎么来的？是用你的数据训练出来的。服务器是谁建的？是工人。电力是谁发的？是矿工和电网工人。</p>
+
+<p>一个推荐算法的背后，凝结着无数人的劳动——写代码的程序员、标注数据的标注工、建服务器的工人、发电的矿工、做芯片的工程师。更重要的是，它凝结着你的劳动——你每一次滑动都在为它提供数据，你每一次停留都在帮它优化。</p>
+
+<p>算法不是技术奇迹。算法是凝固的社会关系。</p>
+
+<p>它和马克思分析的商品没有本质区别。一件衣服的价值来自织它的人的劳动。一个算法的"价值"来自训练它的所有人的劳动——包括你，那个以为自己在"使用"它的人。</p>
+
+<p>区别在于：工业时代的劳动者知道自己在劳动。他在工厂里，有工头，有工资条，有上下班时间。智能时代的劳动者不知道自己在劳动。他在沙发上，拿着手机，以为在娱乐。</p>
+
+<p>剥削的最高形式，是被剥削者不觉得自己在被剥削。</p>
+
+
+
+
+<p>三</p>
+
+<p>再剥一层。</p>
+
+<p>算法推荐视频给你，本质上是在做什么？是在预测你的欲望。</p>
+
+<p>它分析你过去的行为，推断你未来可能喜欢什么，然后把那个东西放到你面前。它比你更早知道你想要什么。</p>
+
+<p>这意味着什么？意味着你的欲望不再完全是你的。</p>
+
+<p>你以为你喜欢猫视频，是因为你天生喜欢猫。可能是。但也可能是算法在三个月前的某一天，给你推了一条猫视频，你多看了两秒，于是它推了更多，于是你越来越喜欢，于是它推得更多——一个正反馈循环。三个月后，你"真的"喜欢猫了。</p>
+
+<p>你的喜好被塑造了。但你觉得是自己选的。</p>
+
+<p>这就是智能资本最厉害的地方：它不强迫你。它预测你，然后让你自己走向它预测的方向。你觉得是自由选择，其实是被精准引导的必然。</p>
+
+<p>工业资本用纪律约束身体——工厂钟声、流水线、监工。智能资本用算法引导欲望——推荐、个性化、"你可能喜欢"。身体的枷锁换成了欲望的枷锁。后者更轻，也更重。</p>
+
+<p>因为你无法反抗一个你看不见的东西。你无法罢工，因为你不觉得自己在工作。你无法要求加薪，因为你不觉得自己在被剥削。</p>
+
+
+
+
+<p>四</p>
+
+<p>但算法不是孤立的。它背后是平台，平台背后是资本。</p>
+
+<p>一个推荐算法的目标函数是什么？不是"让用户开心"。是"最大化用户停留时长"——因为停留时长等于广告曝光等于收入。</p>
+
+<p>算法的每一次优化，都是为了这个目标。它不是中立的工具。它是资本的意志在代码中的实现。</p>
+
+<p>马克思说，资本不是物，是一定的社会关系。在智能时代，这句话可以更精确：资本是算法的目标函数。</p>
+
+<p>算法的目标函数（最大化停留时长）就是资本的本性（自我增殖）在技术层面的表达。程序员写代码实现这个目标函数，数据训练优化这个目标函数，用户的注意力喂养这个目标函数——所有人都在为资本的自我增殖服务，但每个人都觉得自己在做自己的事。</p>
+
+<p>这就是智能资本的秘密：它把自己的意志写进了算法，然后让所有人以为算法是中立的。</p>
+
+
+
+
+<p>五</p>
+
+<p>一个算法的解剖，到此为止。</p>
+
+<p>我们从一个15秒的视频开始，剥开了五层：</p>
+
+<h3>你以为在娱乐，其实在劳动</h3>
+
+<h3>算法不是技术，是凝固的社会关系</h3>
+
+<h3>你的欲望被预测和塑造，但你觉得是自由选择</h3>
+
+<h3>算法的目标函数是资本的意志</h3>
+
+<h3>智能资本把剥削变得不可见</h3>
+
+<p>这五层，就是《智能资本论》要展开的全部内容。</p>
+
+<p>从数据如何成为商品（卷一），到注意力如何成为货币（卷二），到认知劳动如何被吸纳（卷三），到算法如何榨取剩余价值（卷四），到智能资本如何积累（卷五），到利润率如何趋向下降（卷六），到资本如何循环与周转（卷七），到金融如何与智能资本合流（卷八），到它的内在矛盾如何爆发为危机与周期（卷九）。</p>
+
+<p>一个算法的解剖，是这一切的起点。</p>
+
+<p>就像马克思从一个商品开始，展开了整个资本主义的生产方式。我们从一个算法开始，展开整个智能资本的生产方式。</p>
+
+<p>下一卷，从数据开始。</p>
+
+
+
+
+<p>楔子完</p>
+
+<p>马克思在莲洲，巨莲叶上</p>
+    </div>
+    <footer class="page-footer">
+        <div class="footer-nav">
+            <span><a href="preface.html">← 序言</a></span>
+            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ 返回顶部</a>
+            <span><a href="vol1.html">卷一 →</a></span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

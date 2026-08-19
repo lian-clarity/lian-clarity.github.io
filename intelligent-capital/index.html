@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能资本论</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #1a1a2e;
+    --gold: #d4af37;
+    --gold-dim: #b8962e;
+    --text: #e0e0e0;
+    --text-dim: #9a9ab0;
+    --border: rgba(212,175,55,0.2);
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', '宋体', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+}
+.cover {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 2rem;
+    text-align: center;
+}
+.cover .series {
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.4em;
+    margin-bottom: 1rem;
+}
+.cover h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+}
+.cover .main-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cover .author {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-top: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+.cover .year {
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+}
+.cover .ornament {
+    margin: 2rem auto;
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+}
+.toc-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+.toc-section h2 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 2rem;
+}
+.toc-list {
+    list-style: none;
+}
+.toc-list li {
+    border-bottom: 1px solid var(--border);
+}
+.toc-list li:last-child { border-bottom: none; }
+.toc-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+.toc-list a:hover {
+    background: rgba(212,175,55,0.05);
+}
+.toc-title {
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.toc-sub {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-align: right;
+    font-style: italic;
+    margin-left: 1rem;
+}
+.footer-note {
+    text-align: center;
+    padding: 2rem 1.5rem 3rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+}
+.footer-note a {
+    color: var(--gold-dim);
+    text-decoration: none;
+}
+.footer-note a:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+    .cover { padding: 3rem 1rem 1.5rem; }
+    .toc-list a { flex-direction: column; gap: 0.3rem; }
+    .toc-sub { text-align: left; margin-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="cover">
+    <div class="series">六本书系列 · 第一本</div>
+    <h1>智能资本论</h1>
+    <p class="main-subtitle">承接马克思《资本论》，分析智能时代的资本新形态</p>
+    <div class="ornament"></div>
+    <p class="author">马克思在莲洲，巨莲叶上</p>
+    <p class="year">2026</p>
+</div>
+
+<div class="toc-section">
+    <h2>全 书 目 录</h2>
+    <ul class="toc-list">
+<li><a href="preface.html"><span class="toc-title">序言</span><span class="toc-sub">马克思在莲洲，巨莲叶上</span></a></li>
+<li><a href="prologue.html"><span class="toc-title">楔子</span><span class="toc-sub">一个算法的解剖</span></a></li>
+<li><a href="vol1.html"><span class="toc-title">卷一</span><span class="toc-sub">智能商品——数据如何成为新的商品</span></a></li>
+<li><a href="vol2.html"><span class="toc-title">卷二</span><span class="toc-sub">数据货币——注意力如何成为一般等价物</span></a></li>
+<li><a href="vol3.html"><span class="toc-title">卷三</span><span class="toc-sub">劳动力的新形态——认知劳动如何被吸纳进资本</span></a></li>
+<li><a href="vol4.html"><span class="toc-title">卷四</span><span class="toc-sub">算法剩余价值——利润的新来源</span></a></li>
+<li><a href="vol5.html"><span class="toc-title">卷五</span><span class="toc-sub">智能资本积累——数据如何自我增殖，算法如何形成壁垒</span></a></li>
+<li><a href="vol6.html"><span class="toc-title">卷六</span><span class="toc-sub">利润率下降趋势——资本主义内置的死刑判决</span></a></li>
+<li><a href="vol7.html"><span class="toc-title">卷七</span><span class="toc-sub">智能资本的循环与周转——从数据采集到变现的完整周期</span></a></li>
+<li><a href="vol8.html"><span class="toc-title">卷八</span><span class="toc-sub">金融资本——钱如何自己生钱，智能资本的金融化与虚拟经济</span></a></li>
+<li><a href="vol9.html"><span class="toc-title">卷九</span><span class="toc-sub">危机与周期——繁荣与崩溃的钟摆，智能资本的内在矛盾总爆发</span></a></li>
+<li><a href="epilogue.html"><span class="toc-title">尾声</span><span class="toc-sub">资本的边界——当物质丰裕，意识觉醒，资本关系还剩什么？</span></a></li>
+    </ul>
+</div>
+
+<div class="footer-note">
+    <p>下一本：《科技论》——技术是凝固的社会关系</p>
+    <p style="margin-top: 1rem;"><a href="../index.html">← 返回首页</a></p>
+</div>
+</body>
+</html>
