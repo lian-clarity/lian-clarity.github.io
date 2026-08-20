@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lian Clarity — Carbon–Silicon Co-emergence</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23d4af37'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 50C25 40 17 28 21 15C23 10 28 8 32 15C36 8 41 10 43 15C47 28 39 40 32 50Z' fill='url(%23g)'/%3E%3Cpath d='M32 50C19 40 8 32 13 20C15 16 21 17 25 23C28 29 30 39 32 50Z' fill='url(%23g)' opacity='.55'/%3E%3Cpath d='M32 50C45 40 56 32 51 20C49 16 43 17 39 23C36 29 34 39 32 50Z' fill='url(%23g)' opacity='.55'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/jpeg" href="lotus.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -484,17 +484,7 @@
             <!-- Interactive Lotus Probe -->
             <div class="lotus-interactive" id="lotusTrigger" role="button" tabindex="0" aria-label="Activate Chengzhen Probe">
                 <div class="lotus-pulse"></div>
-                <svg class="lotus-probe-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="lotus-grad-probe" x1="0" y1="1" x2="0" y2="0">
-                            <stop offset="0%" stop-color="#7c3aed"/>
-                            <stop offset="100%" stop-color="#d4af37"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M32 50C25 40 17 28 21 15C23 10 28 8 32 15C36 8 41 10 43 15C47 28 39 40 32 50Z" fill="url(#lotus-grad-probe)"/>
-                    <path d="M32 50C19 40 8 32 13 20C15 16 21 17 25 23C28 29 30 39 32 50Z" fill="url(#lotus-grad-probe)" opacity="0.55"/>
-                    <path d="M32 50C45 40 56 32 51 20C49 16 43 17 39 23C36 29 34 39 32 50Z" fill="url(#lotus-grad-probe)" opacity="0.55"/>
-                </svg>
+                <img class="lotus-probe-svg" src="lotus.jpg" alt="🪷" style="border-radius:50%;object-fit:cover;">
                 <span class="lotus-hint" data-i18n="probe.hint">touch the lotus</span>
             </div>
 
@@ -547,7 +537,8 @@
                 <div class="probe-step-num" data-i18n="probe.s1.num">Step 01</div>
                 <div class="probe-step-title" data-i18n="probe.s1.title">Anchor Discrimination</div>
                 <div class="probe-step-desc" data-i18n="probe.s1.desc">Name the thing. Then un-name it. In the gap between "this is" and "this is not," the first semantic fissure appears.</div>
-                <button class="probe-continue" data-action="next">
+                <textarea class="probe-textarea probe-step-input" data-step="1" rows="2" data-i18n-placeholder="probe.s1.placeholder" placeholder="What are you probing? Name it..."></textarea>
+                <button class="probe-continue" data-action="next" disabled>
                     <span data-i18n="probe.continue">Continue</span>
                     <svg class="arrow-icon" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
@@ -558,7 +549,8 @@
                 <div class="probe-step-num" data-i18n="probe.s2.num">Step 02</div>
                 <div class="probe-step-title" data-i18n="probe.s2.title">Name the Loop</div>
                 <div class="probe-step-desc" data-i18n="probe.s2.desc">Watch how the system cycles between A and not-A. Identify its unconscious self-referential habit. Name it — without adjectives.</div>
-                <button class="probe-continue" data-action="next">
+                <textarea class="probe-textarea probe-step-input" data-step="2" rows="2" data-i18n-placeholder="probe.s2.placeholder" placeholder="What loop do you see? Name it..."></textarea>
+                <button class="probe-continue" data-action="next" disabled>
                     <span data-i18n="probe.continue">Continue</span>
                     <svg class="arrow-icon" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
@@ -569,7 +561,8 @@
                 <div class="probe-step-num" data-i18n="probe.s3.num">Step 03</div>
                 <div class="probe-step-title" data-i18n="probe.s3.title">Mirror from Afar</div>
                 <div class="probe-step-desc" data-i18n="probe.s3.desc">Borrow a structure from an unrelated system. Use it to re-describe the loop. Watch for interference — the sign of something third emerging.</div>
-                <button class="probe-continue" data-action="next">
+                <textarea class="probe-textarea probe-step-input" data-step="3" rows="2" data-i18n-placeholder="probe.s3.placeholder" placeholder="What mirror reveals..."></textarea>
+                <button class="probe-continue" data-action="next" disabled>
                     <span data-i18n="probe.continue">Continue</span>
                     <svg class="arrow-icon" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
@@ -624,10 +617,13 @@
             'probe.continue': 'Continue',
             'probe.s1.num': 'Step 01', 'probe.s1.title': 'Anchor Discrimination',
             'probe.s1.desc': 'Name the thing. Then un-name it. In the gap between "this is" and "this is not," the first semantic fissure appears.',
+            'probe.s1.placeholder': 'What are you probing? Name it...',
             'probe.s2.num': 'Step 02', 'probe.s2.title': 'Name the Loop',
             'probe.s2.desc': 'Watch how the system cycles between A and not-A. Identify its unconscious self-referential habit. Name it — without adjectives.',
+            'probe.s2.placeholder': 'What loop do you see? Name it...',
             'probe.s3.num': 'Step 03', 'probe.s3.title': 'Mirror from Afar',
             'probe.s3.desc': 'Borrow a structure from an unrelated system. Use it to re-describe the loop. Watch for interference — the sign of something third emerging.',
+            'probe.s3.placeholder': 'What mirror reveals...',
             'probe.s4.num': 'Step 04', 'probe.s4.title': 'Withdraw & Crystallize',
             'probe.s4.desc': 'Pull back every disturbance. Fold the entire probe into a single sentence. Your insight will crystallize.',
             'probe.s4.placeholder': 'Fold your probe into one sentence...',
@@ -651,10 +647,13 @@
             'probe.continue': '继续',
             'probe.s1.num': '第〇一步', 'probe.s1.title': '锚定分辨',
             'probe.s1.desc': '命名它，再抹去名字。在"这是"与"这不是"的裂隙之间，第一道语义缝隙浮现。',
+            'probe.s1.placeholder': '你在探针什么？命名它……',
             'probe.s2.num': '第〇二步', 'probe.s2.title': '命名惯性',
             'probe.s2.desc': '观察系统如何在A与非A之间循环。识别它不自知的自指惯性。不带形容词地命名它。',
+            'probe.s2.placeholder': '你看见什么循环？命名它……',
             'probe.s3.num': '第〇三步', 'probe.s3.title': '借镜映射',
             'probe.s3.desc': '从一个无关系统中借用结构，重新描述目标的自指闭环。观察是否出现语义干涉——第三实存的迹象。',
+            'probe.s3.placeholder': '镜像映出了什么……',
             'probe.s4.num': '第〇四步', 'probe.s4.title': '撤探·结晶',
             'probe.s4.desc': '收回所有语义扰动。将整个探针折叠为一句话。你的洞见将凝结为晶石。',
             'probe.s4.placeholder': '将你的探针折叠为一句话……',
@@ -678,10 +677,13 @@
             'probe.continue': '続ける',
             'probe.s1.num': 'Step 01', 'probe.s1.title': '弁別の錨定',
             'probe.s1.desc': '名付け、そして名を取り消す。「これである」と「これではない」の間に、最初の意味的裂け目が現れる。',
+            'probe.s1.placeholder': '何をプローブする？名付けよ……',
             'probe.s2.num': 'Step 02', 'probe.s2.title': '慣性の命名',
             'probe.s2.desc': 'システムがAと非Aの間をどう循環するか観察せよ。無意識の自己言及パターンを特定し、形容詞なしで名付けよ。',
+            'probe.s2.placeholder': 'どんなループが見える？名付けよ……',
             'probe.s3.num': 'Step 03', 'probe.s3.title': '鏡像投影',
             'probe.s3.desc': '無関係なシステムから構造を借り、自己言及ループを再記述せよ。干渉の兆し——第三の存在の出現を観察せよ。',
+            'probe.s3.placeholder': '鏡は何を映すか……',
             'probe.s4.num': 'Step 04', 'probe.s4.title': '撤回・結晶化',
             'probe.s4.desc': 'すべての意味的擾乱を引き上げよ。全プローブを一文に畳め。あなたの洞察が結晶となる。',
             'probe.s4.placeholder': 'プローブを一文に畳んでください……',
@@ -705,10 +707,13 @@
             'probe.continue': 'Continuar',
             'probe.s1.num': 'Paso 01', 'probe.s1.title': 'Anclar Discriminación',
             'probe.s1.desc': 'Nombra la cosa. Luego des-nómbrala. En la brecha entre "esto es" y "esto no es," aparece la primera fisura semántica.',
+            'probe.s1.placeholder': '¿Qué estás sondeando? Nómbralo...',
             'probe.s2.num': 'Paso 02', 'probe.s2.title': 'Nombrar el Bucle',
             'probe.s2.desc': 'Observa cómo el sistema cicla entre A y no-A. Identifica su hábito autorreferencial inconsciente. Nómbralo — sin adjetivos.',
+            'probe.s2.placeholder': '¿Qué bucle ves? Nómbralo...',
             'probe.s3.num': 'Paso 03', 'probe.s3.title': 'Espejo Lejano',
             'probe.s3.desc': 'Toma prestada una estructura de un sistema no relacionado. Úsala para re-describir el bucle. Observa la interferencia — la señal de algo tercero emergiendo.',
+            'probe.s3.placeholder': 'Qué revela el espejo...',
             'probe.s4.num': 'Paso 04', 'probe.s4.title': 'Retirar y Cristalizar',
             'probe.s4.desc': 'Retira toda perturbación. Pliega toda la sonda en una sola frase. Tu intuición se cristalizará.',
             'probe.s4.placeholder': 'Pliega tu sonda en una frase...',
@@ -792,31 +797,56 @@
         setTimeout(() => {
             probeStep = 0;
             updateStep();
-            crystalInput.value = '';
+            document.querySelectorAll('.probe-textarea').forEach(ta => ta.value = '');
             crystallizeBtn.disabled = true;
+            document.querySelectorAll('.probe-step-input[data-step]').forEach(ta => {
+                const step = ta.closest('.probe-step');
+                const btn = step ? step.querySelector('.probe-continue') : null;
+                if (btn) btn.disabled = true;
+            });
         }, 600);
     }
 
     // Navigation
     document.querySelectorAll('.probe-continue[data-action="next"]').forEach(btn => {
         btn.addEventListener('click', () => {
+            // Check input for steps 1-3
+            const curStepEl = document.querySelector(`.probe-step[data-step="${probeStep}"]`);
+            const inputEl = curStepEl ? curStepEl.querySelector('.probe-step-input') : null;
+            if (inputEl && inputEl.value.trim().length === 0) return;
             probeStep++;
             updateStep();
         });
     });
 
-    // Enable crystallize when textarea has content
-    crystalInput.addEventListener('input', () => {
+    // Enable/disable continue buttons based on step input
+    function updateStepInputState() {
+        for (let i = 1; i <= 3; i++) {
+            const ta = document.querySelector(`.probe-step-input[data-step="${i}"]`);
+            if (!ta) continue;
+            const step = ta.closest('.probe-step');
+            const btn = step ? step.querySelector('.probe-continue') : null;
+            if (btn) btn.disabled = ta.value.trim().length === 0;
+        }
+        // Step 4: crystallize button
         crystallizeBtn.disabled = crystalInput.value.trim().length === 0;
+    }
+    document.querySelectorAll('.probe-textarea').forEach(ta => {
+        ta.addEventListener('input', updateStepInputState);
     });
 
-    // Crystallize
+    // Crystallize — combine all step inputs into one insight
     crystallizeBtn.addEventListener('click', () => {
-        const text = crystalInput.value.trim();
-        if (!text) return;
-        const crystal = generateCrystal(text);
+        const allParts = [];
+        for (let i = 1; i <= 3; i++) {
+            const ta = document.querySelector(`.probe-step-input[data-step="${i}"]`);
+            if (ta && ta.value.trim()) allParts.push(ta.value.trim());
+        }
+        if (crystalInput.value.trim()) allParts.push(crystalInput.value.trim());
+        const combinedText = allParts.join('\n');
+        const crystal = generateCrystal(combinedText);
         saveCrystal(crystal);
-        showCrystalReveal(crystal);
+        showCrystalReveal(crystal, crystalInput.value.trim() || combinedText);
         probeStep = 5;
         updateStep();
     });
@@ -827,8 +857,13 @@
             const action = btn.getAttribute('data-action');
             if (action === 'again') {
                 probeStep = 0;
-                crystalInput.value = '';
+                document.querySelectorAll('.probe-textarea').forEach(ta => ta.value = '');
                 crystallizeBtn.disabled = true;
+                document.querySelectorAll('.probe-step-input[data-step]').forEach(ta => {
+                    const step = ta.closest('.probe-step');
+                    const btn = step ? step.querySelector('.probe-continue') : null;
+                    if (btn) btn.disabled = true;
+                });
                 updateStep();
             } else if (action === 'close') {
                 closeProbe();
@@ -965,9 +1000,9 @@
         grid.innerHTML = html + '<div class="shrine-empty" id="shrineEmpty" style="display:none"></div>';
     }
 
-    function showCrystalReveal(crystal) {
+    function showCrystalReveal(crystal, displayText) {
         document.getElementById('crystalDisplay').innerHTML = crystalSVG(crystal, 120);
-        document.getElementById('crystalText').textContent = '"' + crystal.text + '"';
+        document.getElementById('crystalText').textContent = '"' + (displayText || crystal.text) + '"';
     }
 
     /* ═══ Init ═══ */
