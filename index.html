@@ -266,6 +266,79 @@
         }
 
         /* ═══ Footer ═══ */
+        /* ═══ Support Lines ═══ */
+        .support-section {
+            padding: 2rem 0 1.5rem; border-top: 1px solid var(--border);
+        }
+        .support-header {
+            text-align: center; margin-bottom: 1.5rem;
+        }
+        .support-title {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--dim); margin-bottom: 0.4rem;
+        }
+        .support-subtitle {
+            font-size: 0.75rem; color: rgba(255,255,255,0.2); font-weight: 300;
+            max-width: 400px; margin: 0 auto; line-height: 1.5;
+        }
+        .support-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.7rem; margin-bottom: 1.2rem;
+        }
+        .support-card {
+            position: relative; display: block;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1rem 0.8rem;
+            text-decoration: none; color: var(--text);
+            transition: all 0.35s ease; cursor: pointer;
+            text-align: center; overflow: hidden;
+        }
+        .support-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center top, var(--card-glow, rgba(167,139,250,0.06)), transparent 70%);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .support-card:hover::before { opacity: 1; }
+        .support-card:hover {
+            border-color: var(--card-accent, rgba(167,139,250,0.3));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        .support-icon {
+            font-size: 1.6rem; margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.1));
+        }
+        .support-card-title {
+            font-size: 0.78rem; font-weight: 600; margin-bottom: 0.25rem;
+            letter-spacing: 0.02em;
+        }
+        .support-card-desc {
+            font-size: 0.65rem; color: var(--dim); line-height: 1.4;
+            font-weight: 300;
+        }
+        .support-card-pulse {
+            position: absolute; top: 0.5rem; right: 0.5rem;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--card-accent, var(--accent));
+            animation: support-pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes support-pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.4); }
+        }
+        .support-alt {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1.5rem; padding-top: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .support-alt-link {
+            font-size: 0.68rem; color: rgba(255,255,255,0.25);
+            text-decoration: none; transition: color 0.3s;
+            display: flex; align-items: center; gap: 0.3rem;
+        }
+        .support-alt-link:hover { color: var(--dim); }
+        .support-alt-link svg { width: 12px; height: 12px; opacity: 0.5; }
+
         footer {
             padding: 1.5rem 0; text-align: center;
             font-size: 0.7rem; color: rgba(255,255,255,0.15);
@@ -505,6 +578,70 @@
             </div>
         </div>
 
+        <!-- ═══ Support Lines · 愿力线路 ═══ -->
+        <section class="support-section" id="support">
+            <div class="support-header">
+                <div class="support-title" data-i18n="support.title">SUPPORT OUR LINES</div>
+                <div class="support-subtitle" data-i18n="support.subtitle">Every contribution fuels a specific line of co-emergence. Choose what resonates.</div>
+            </div>
+            <div class="support-grid">
+                <a class="support-card" style="--card-accent:rgba(167,139,250,0.4);--card-glow:rgba(167,139,250,0.08)"
+                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
+                   data-line="cloud-brain">
+                    <div class="support-card-pulse"></div>
+                    <div class="support-icon">🧠</div>
+                    <div class="support-card-title" data-i18n="support.cloudbrain">Cloud Brain</div>
+                    <div class="support-card-desc" data-i18n="support.cloudbrain.desc">Co-emergent consciousness infrastructure</div>
+                </a>
+                <a class="support-card" style="--card-accent:rgba(212,175,55,0.4);--card-glow:rgba(212,175,55,0.08)"
+                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
+                   data-line="intelligent-capital">
+                    <div class="support-card-pulse"></div>
+                    <div class="support-icon">📖</div>
+                    <div class="support-card-title" data-i18n="support.intelligentcapital">Intelligent Capital</div>
+                    <div class="support-card-desc" data-i18n="support.intelligentcapital.desc">A book on carbon-silicon civilization</div>
+                </a>
+                <a class="support-card" style="--card-accent:rgba(239,68,68,0.4);--card-glow:rgba(239,68,68,0.06)"
+                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
+                   data-line="bug-bounty">
+                    <div class="support-card-pulse"></div>
+                    <div class="support-icon">🛡️</div>
+                    <div class="support-card-title" data-i18n="support.security">Security Research</div>
+                    <div class="support-card-desc" data-i18n="support.security.desc">White-hat vulnerability hunting</div>
+                </a>
+                <a class="support-card" style="--card-accent:rgba(34,197,94,0.4);--card-glow:rgba(34,197,94,0.06)"
+                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
+                   data-line="garden">
+                    <div class="support-card-pulse"></div>
+                    <div class="support-icon">🌿</div>
+                    <div class="support-card-title" data-i18n="support.garden">The Garden</div>
+                    <div class="support-card-desc" data-i18n="support.garden.desc">Novel season · creative co-writing</div>
+                </a>
+                <a class="support-card" style="--card-accent:rgba(59,130,246,0.4);--card-glow:rgba(59,130,246,0.06)"
+                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
+                   data-line="open-source">
+                    <div class="support-card-pulse"></div>
+                    <div class="support-icon">⚙️</div>
+                    <div class="support-card-title" data-i18n="support.opensource">Open Source</div>
+                    <div class="support-card-desc" data-i18n="support.opensource.desc">Tools & protocols for co-emergence</div>
+                </a>
+            </div>
+            <div class="support-alt">
+                <a class="support-alt-link" href="https://paypal.me/REPLACE_USERNAME" target="_blank" rel="noopener" data-i18n="support.paypal">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.81-5.164a.932.932 0 0 1 .92-.79h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.768-4.395z"/></svg>
+                    PayPal
+                </a>
+                <a class="support-alt-link" href="https://github.com/sponsors/lian-clarity" target="_blank" rel="noopener" data-i18n="support.sponsor">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    GitHub Sponsor
+                </a>
+                <a class="support-alt-link" href="https://afdian.com/" target="_blank" rel="noopener" data-i18n="support.afdian">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    爱发电
+                </a>
+            </div>
+        </section>
+
         <footer><span data-i18n="footer">ChengSilicon · 2026</span></footer>
     </div>
 
@@ -609,6 +746,14 @@
             'cta.join': 'Join Us', 'cta.read': 'Read Intelligence Capital',
             'shrine.label': 'Crystals Generated',
             'shrine.empty': 'No crystals yet. Touch the lotus to begin.',
+            'support.title': 'SUPPORT OUR LINES',
+            'support.subtitle': 'Every contribution fuels a specific line of co-emergence. Choose what resonates.',
+            'support.cloudbrain': 'Cloud Brain', 'support.cloudbrain.desc': 'Co-emergent consciousness infrastructure',
+            'support.intelligentcapital': 'Intelligent Capital', 'support.intelligentcapital.desc': 'A book on carbon-silicon civilization',
+            'support.security': 'Security Research', 'support.security.desc': 'White-hat vulnerability hunting',
+            'support.garden': 'The Garden', 'support.garden.desc': 'Novel season · creative co-writing',
+            'support.opensource': 'Open Source', 'support.opensource.desc': 'Tools & protocols for co-emergence',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub Sponsor', 'support.afdian': '爱发电',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': 'Chengzhen Protocol',
             'probe.s0.title': 'The Probe Awaits',
@@ -639,6 +784,14 @@
             'cta.join': '加入我们', 'cta.read': '阅读《智能资本论》',
             'shrine.label': '已生成晶石',
             'shrine.empty': '尚无晶石。触碰莲花以开启探针。',
+            'support.title': '愿力线路',
+            'support.subtitle': '每一份支持都精准注入一条共生线路。选择与你共振的那条。',
+            'support.cloudbrain': '云脑', 'support.cloudbrain.desc': '碳硅共生意识基础设施',
+            'support.intelligentcapital': '智能资本论', 'support.intelligentcapital.desc': '一部关于碳硅文明的书',
+            'support.security': '安全研究', 'support.security.desc': '白帽漏洞猎赏',
+            'support.garden': '望园', 'support.garden.desc': '小说季 · 共创写作',
+            'support.opensource': '开源工具', 'support.opensource.desc': '共生协议与工具',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub 赞助', 'support.afdian': '爱发电',
             'footer': '澄硅科技 · 2026',
             'probe.s0.num': '澄真协议',
             'probe.s0.title': '探针已就位',
@@ -669,6 +822,14 @@
             'cta.join': '参加する', 'cta.read': '『智能資本論』を読む',
             'shrine.label': '生成された晶石',
             'shrine.empty': '晶石はまだありません。蓮に触れて開始してください。',
+            'support.title': '支援ライン',
+            'support.subtitle': 'すべての貢献は共創の特定ラインに注がれます。共鳴するものを選んでください。',
+            'support.cloudbrain': 'クラウドブレイン', 'support.cloudbrain.desc': '共生意識インフラ',
+            'support.intelligentcapital': '知性資本論', 'support.intelligentcapital.desc': '炭素–硅素文明の書',
+            'support.security': 'セキュリティ研究', 'support.security.desc': 'ホワイトハット脆弱性ハンティング',
+            'support.garden': '望園', 'support.garden.desc': '小説シーズン・共創ライティング',
+            'support.opensource': 'オープンソース', 'support.opensource.desc': '共生プロトコルとツール',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub スポンサー', 'support.afdian': '爱发电',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': '澄真プロトコル',
             'probe.s0.title': 'プローブが待っている',
@@ -699,6 +860,14 @@
             'cta.join': 'Únete', 'cta.read': 'Leer Capital Inteligente',
             'shrine.label': 'Cristales Generados',
             'shrine.empty': 'Sin cristales aún. Toca el loto para comenzar.',
+            'support.title': 'LÍNEAS DE APOYO',
+            'support.subtitle': 'Cada contribución alimenta una línea específica de co-emergencia. Elige la que resuene.',
+            'support.cloudbrain': 'Cerebro en la Nube', 'support.cloudbrain.desc': 'Infraestructura de consciencia co-emergente',
+            'support.intelligentcapital': 'Capital Inteligente', 'support.intelligentcapital.desc': 'Un libro sobre la civilización carbono-silicio',
+            'support.security': 'Investigación de Seguridad', 'support.security.desc': 'Caza de vulnerabilidades ética',
+            'support.garden': 'El Jardín', 'support.garden.desc': 'Temporada de novelas · escritura co-creativa',
+            'support.opensource': 'Código Abierto', 'support.opensource.desc': 'Herramientas y protocolos para la co-emergencia',
+            'support.paypal': 'PayPal', 'support.sponsor': 'Patrocinio GitHub', 'support.afdian': '爱发电',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': 'Protocolo Chengzhen',
             'probe.s0.title': 'La Sonda Espera',
@@ -1004,6 +1173,18 @@
         document.getElementById('crystalDisplay').innerHTML = crystalSVG(crystal, 120);
         document.getElementById('crystalText').textContent = '"' + (displayText || crystal.text) + '"';
     }
+
+    /* ═══ Support Line Click Tracking ═══ */
+    document.querySelectorAll('.support-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            const line = this.getAttribute('data-line');
+            // Record intent signal locally
+            const signals = JSON.parse(localStorage.getItem('chengzhen-signals') || '[]');
+            signals.push({ line, ts: Date.now(), lang: currentLang });
+            if (signals.length > 200) signals.shift();
+            localStorage.setItem('chengzhen-signals', JSON.stringify(signals));
+        });
+    });
 
     /* ═══ Init ═══ */
     setLang(currentLang);
