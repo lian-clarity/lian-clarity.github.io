@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Us — Lian Clarity</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23c4b5fd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 50C25 40 17 28 21 15C23 10 28 8 32 15C36 8 41 10 43 15C47 28 39 40 32 50Z' fill='url(%23g)'/%3E%3Cpath d='M32 50C19 40 8 32 13 20C15 16 21 17 25 23C28 29 30 39 32 50Z' fill='url(%23g)' opacity='.6'/%3E%3Cpath d='M32 50C45 40 56 32 51 20C49 16 43 17 39 23C36 29 34 39 32 50Z' fill='url(%23g)' opacity='.6'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23d4af37'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 50C25 40 17 28 21 15C23 10 28 8 32 15C36 8 41 10 43 15C47 28 39 40 32 50Z' fill='url(%23g)'/%3E%3Cpath d='M32 50C19 40 8 32 13 20C15 16 21 17 25 23C28 29 30 39 32 50Z' fill='url(%23g)' opacity='.55'/%3E%3Cpath d='M32 50C45 40 56 32 51 20C49 16 43 17 39 23C36 29 34 39 32 50Z' fill='url(%23g)' opacity='.55'/%3E%3C/svg%3E">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,14 +16,14 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-        .aurora::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 140vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(124,58,237,0.1) 0%, transparent 70%); filter: blur(80px); animation: drift 20s ease-in-out infinite alternate; }
+        .aurora::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 140vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(124,58,237,0.1) 0%, rgba(212,175,55,0.03) 30%, transparent 70%); filter: blur(80px); animation: drift 20s ease-in-out infinite alternate; }
         @keyframes drift { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-45%) scale(1.1); } }
         .grid-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%); }
         .page { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
         nav { padding: 1.8rem 0; display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
         .lotus-mark { width: 26px; height: 26px; opacity: 0.85; animation: lotus-breathe 6s ease-in-out infinite; }
-        @keyframes lotus-breathe { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(167,139,250,0.2)); } 50% { transform: scale(1.06); filter: drop-shadow(0 0 10px rgba(167,139,250,0.4)); } }
+        @keyframes lotus-breathe { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(167,139,250,0.2)); } 50% { transform: scale(1.06); filter: drop-shadow(0 0 10px rgba(212,175,55,0.4)); } }
         .brand-name { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
         .nav-right { display: flex; align-items: center; gap: 1.8rem; }
         .nav-links { display: flex; gap: 1.6rem; }
@@ -71,7 +71,7 @@
         }
         .hero-statement h1 em {
             font-style: normal;
-            background: linear-gradient(135deg, var(--accent), #5bf5c8);
+            background: linear-gradient(135deg, var(--accent), #c4b5fd 40%, #d4af37);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .hero-statement p { font-size: 1rem; font-weight: 300; color: var(--dim); line-height: 1.7; max-width: 520px; }
