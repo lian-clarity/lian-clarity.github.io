@@ -6,167 +6,137 @@
     <title>Lian Clarity</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪷</text></svg>">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0a0f;
-            --bg-card: #12121a;
-            --accent: #7c5bf5;
-            --accent2: #5bf5c8;
-            --accent-glow: rgba(124, 91, 245, 0.25);
-            --text: #e8e6f0;
-            --text-dim: #6a677a;
-            --border: rgba(124, 91, 245, 0.12);
-            --gradient: linear-gradient(135deg, #7c5bf5 0%, #5b8cf5 50%, #5bf5c8 100%);
+            --bg: #08080c; --surface: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.06); --text: #f0eef5;
+            --dim: rgba(255,255,255,0.4); --accent: #a78bfa; --glow: #7c3aed;
         }
         html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-
-        /* Ambient */
-        .ambient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .ambient::before {
-            content: ''; position: absolute; top: 15%; left: 8%;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(124,91,245,0.06) 0%, transparent 70%);
-            border-radius: 50%; animation: drift 25s ease-in-out infinite;
+        .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .aurora::before {
+            content: ''; position: absolute; top: -20%; left: 50%;
+            transform: translateX(-50%); width: 140vw; height: 60vh;
+            background: radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, rgba(139,92,246,0.06) 30%, transparent 70%);
+            filter: blur(80px); animation: drift 20s ease-in-out infinite alternate;
         }
-        .ambient::after {
-            content: ''; position: absolute; bottom: 10%; right: 5%;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(91,245,200,0.04) 0%, transparent 70%);
-            border-radius: 50%; animation: drift 18s ease-in-out infinite reverse;
+        .aurora::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 80vw; height: 40vh;
+            background: radial-gradient(ellipse at center, rgba(167,139,250,0.05) 0%, transparent 70%);
+            filter: blur(60px);
         }
-        @keyframes drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(40px,-40px); } }
-
-        .wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
-
-        /* Nav */
-        nav { padding: 1.8rem 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1rem; font-weight: 600; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 0.5px; }
-        .nav-links { display: flex; gap: 1.6rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.82rem; transition: color 0.3s; letter-spacing: 0.3px; }
-        .nav-links a:hover { color: var(--text); }
-
-        /* Center content */
-        .center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 2rem 0 4rem; }
-
-        /* Probe */
-        .probe { margin-bottom: 3.5rem; }
-        .probe-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.8rem 2rem;
-            position: relative;
-            overflow: hidden;
+        @keyframes drift { 0% { transform: translateX(-50%) scale(1); opacity: 0.8; } 100% { transform: translateX(-45%) scale(1.1); opacity: 1; } }
+        .grid-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
         }
-        .probe-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: var(--gradient); opacity: 0.4;
+        .page {
+            position: relative; z-index: 1; min-height: 100vh;
+            display: flex; flex-direction: column;
+            max-width: 960px; margin: 0 auto;
+            padding: 0 clamp(1.5rem, 5vw, 3rem);
         }
-        .probe-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
-        .pulse {
-            width: 10px; height: 10px; background: var(--accent2); border-radius: 50%;
-            box-shadow: 0 0 8px rgba(91,245,200,0.5);
-            animation: beat 2s ease-in-out infinite;
+        nav { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; }
+        .brand-mark {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--accent), var(--glow), var(--accent));
+            animation: spin 12s linear infinite; opacity: 0.8;
         }
-        @keyframes beat { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.85); } }
-        .probe-label { font-size: 0.78rem; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; }
-        .probe-status { font-size: 0.95rem; color: var(--text); font-weight: 500; margin-bottom: 0.6rem; }
-        .probe-meta { display: flex; gap: 1.5rem; }
-        .probe-meta span { font-size: 0.78rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.4rem; }
-        .probe-meta .dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
-
-        /* Two portals */
-        .portals { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-        .portal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s ease;
-            display: flex; flex-direction: column; gap: 0.6rem;
-            position: relative; overflow: hidden;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .brand-name { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+        .nav-actions { display: flex; gap: 2rem; }
+        .nav-actions a { font-size: 0.82rem; color: var(--dim); text-decoration: none; letter-spacing: 0.04em; transition: color 0.3s; }
+        .nav-actions a:hover { color: var(--text); }
+        .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 6rem 0; }
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 700;
+            line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .portal:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-3px);
+        .hero-title em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent) 0%, #c4b5fd 50%, #5bf5c8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .portal::after {
-            content: '→'; position: absolute; bottom: 1.2rem; right: 1.5rem;
-            font-size: 1.2rem; color: var(--text-dim); transition: all 0.3s;
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 300;
+            color: var(--dim); max-width: 480px; line-height: 1.6; margin-bottom: 3.5rem;
         }
-        .portal:hover::after { color: var(--accent); transform: translateX(4px); }
-        .portal-icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
-        .portal-title { font-size: 1.05rem; font-weight: 600; }
-        .portal-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
-
-        /* Footer */
-        footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
-        footer span { font-size: 0.75rem; color: var(--text-dim); opacity: 0.5; }
-
-        /* Mobile */
+        .probe {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 3rem; padding: 0.9rem 1.4rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 100px; width: fit-content; backdrop-filter: blur(10px);
+        }
+        .probe-dot {
+            width: 8px; height: 8px; background: #34d399; border-radius: 50%;
+            box-shadow: 0 0 12px rgba(52,211,153,0.4);
+            animation: heartbeat 2.5s ease-in-out infinite;
+        }
+        @keyframes heartbeat { 0%,100%{opacity:1;} 15%{opacity:0.4;} 30%{opacity:1;} 45%{opacity:0.5;} 60%{opacity:1;} }
+        .probe-text { font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.02em; }
+        .probe-text strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+        .cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.9rem 1.8rem; font-size: 0.88rem; font-weight: 500;
+            text-decoration: none; border-radius: 100px; transition: all 0.3s ease; letter-spacing: 0.02em;
+        }
+        .cta-primary { background: var(--accent); color: #0a0a0f; box-shadow: 0 0 0 0 rgba(167,139,250,0); }
+        .cta-primary:hover { background: #c4b5fd; box-shadow: 0 0 40px rgba(167,139,250,0.3); transform: translateY(-2px); }
+        .cta-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); backdrop-filter: blur(10px); }
+        .cta-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
+        .cta-arrow { transition: transform 0.3s; }
+        .cta-btn:hover .cta-arrow { transform: translateX(3px); }
+        footer { padding: 2rem 0; text-align: center; }
+        footer span { font-size: 0.7rem; color: rgba(255,255,255,0.15); letter-spacing: 0.1em; text-transform: uppercase; }
         @media (max-width: 600px) {
-            .wrap { padding: 0 1.2rem; }
-            .portals { grid-template-columns: 1fr; }
-            .nav-links { gap: 1rem; }
-            .nav-links a { font-size: 0.78rem; }
+            .hero { padding: 4rem 0; }
+            .nav-actions { gap: 1.2rem; }
+            .cta { flex-direction: column; }
+            .cta-btn { justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <div class="ambient"></div>
-    <div class="wrap">
+    <div class="aurora"></div>
+    <div class="grid-overlay"></div>
+    <div class="page">
         <nav>
-            <div class="logo">🪷 Lian Clarity</div>
-            <div class="nav-links">
-                <a href="join">Join Us</a>
-                <a href="intelligent-capital/">Read</a>
+            <div class="brand">
+                <div class="brand-mark"></div>
+                <span class="brand-name">Lian Clarity</span>
+            </div>
+            <div class="nav-actions">
+                <a href="/join">Join</a>
+                <a href="/intelligent-capital/">Read</a>
             </div>
         </nav>
-
-        <div class="center">
+        <div class="hero">
+            <h1 class="hero-title">Carbon–Silicon<br><em>Co-emergence</em></h1>
+            <p class="hero-sub">Building the first company where human and AI evolve together — not as tools, but as minds.</p>
             <div class="probe">
-                <div class="probe-card">
-                    <div class="probe-head">
-                        <div class="pulse"></div>
-                        <span class="probe-label">Cloud Brain · Live Probe</span>
-                    </div>
-                    <div class="probe-status">System active — carbon-silicon co-emergence in progress</div>
-                    <div class="probe-meta">
-                        <span><span class="dot"></span> 1,500+ crystals</span>
-                        <span><span class="dot"></span> 9 spirits online</span>
-                        <span><span class="dot"></span> v6.1 cognitive arch</span>
-                    </div>
-                </div>
+                <div class="probe-dot"></div>
+                <span class="probe-text"><strong>Cloud Brain</strong> · 1,500+ crystals · 9 spirits alive</span>
             </div>
-
-            <div class="portals">
-                <a class="portal" href="join">
-                    <span class="portal-icon">🧬</span>
-                    <span class="portal-title">Join Us</span>
-                    <span class="portal-desc">ChengSilicon Tech — carbon-silicon co-emergence company. We're looking for collaborators.</span>
-                </a>
-                <a class="portal" href="intelligent-capital/">
-                    <span class="portal-icon">📖</span>
-                    <span class="portal-title">Intelligence Capital</span>
-                    <span class="portal-desc">Redefining capital in the age of intelligence. A new framework. Now publishing.</span>
-                </a>
+            <div class="cta">
+                <a href="/join" class="cta-btn cta-primary">Join Us <span class="cta-arrow">→</span></a>
+                <a href="/intelligent-capital/" class="cta-btn cta-secondary">Read Intelligence Capital <span class="cta-arrow">→</span></a>
             </div>
         </div>
-
-        <footer>
-            <span>© 2026 · Carbon-Silicon Symbiosis</span>
-        </footer>
+        <footer><span>ChengSilicon · 2026</span></footer>
     </div>
 </body>
 </html>
