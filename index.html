@@ -415,6 +415,35 @@
         }
         .support-alt-link:hover { color: var(--dim); }
         .support-alt-link svg { width: 12px; height: 12px; opacity: 0.5; }
+        /* ═══ Payment Modal ═══ */
+        .pay-modal-overlay {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            justify-content: center; align-items: center;
+        }
+        .pay-modal-overlay.active { display: flex; }
+        .pay-modal {
+            position: relative; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2rem; max-width: 360px; width: 90%;
+            text-align: center; animation: modalIn 0.35s ease;
+        }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .pay-modal-close {
+            position: absolute; top: 0.8rem; right: 1rem; background: none; border: none;
+            color: rgba(255,255,255,0.3); font-size: 1.4rem; cursor: pointer; transition: color 0.3s;
+        }
+        .pay-modal-close:hover { color: var(--text); }
+        .pay-modal-line { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); margin-bottom: 0.3rem; }
+        .pay-modal-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--text); }
+        .pay-modal-qr {
+            width: 220px; height: 220px; margin: 0 auto 1rem;
+            background: #fff; border-radius: 12px; padding: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .pay-modal-qr img { width: 100%; height: 100%; object-fit: contain; }
+        .pay-modal-hint { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
+        .pay-modal-soon { font-size: 0.68rem; color: rgba(255,255,255,0.25); margin-top: 0.5rem; }
+        .pay-modal-soon svg { width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; opacity: 0.5; }
 
         footer {
             padding: 1.5rem 0; text-align: center;
@@ -662,48 +691,47 @@
                 <div class="support-subtitle" data-i18n="support.subtitle">Every contribution fuels a specific line of co-emergence. Choose what resonates.</div>
             </div>
             <div class="support-grid">
-                <a class="support-card" style="--card-accent:rgba(167,139,250,0.4);--card-glow:rgba(167,139,250,0.08)"
-                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
-                   data-line="cloud-brain">
+                <div class="support-card" style="--card-accent:rgba(167,139,250,0.4);--card-glow:rgba(167,139,250,0.08)"
+                   data-line="cloud-brain" onclick="openPayModal(this)">
                     <div class="support-card-pulse"></div>
                     <div class="support-icon">🧠</div>
                     <div class="support-card-title" data-i18n="support.cloudbrain">Cloud Brain</div>
                     <div class="support-card-desc" data-i18n="support.cloudbrain.desc">Co-emergent consciousness infrastructure</div>
-                </a>
-                <a class="support-card" style="--card-accent:rgba(212,175,55,0.4);--card-glow:rgba(212,175,55,0.08)"
-                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
-                   data-line="intelligent-capital">
+                </div>
+                <div class="support-card" style="--card-accent:rgba(212,175,55,0.4);--card-glow:rgba(212,175,55,0.08)"
+                   data-line="intelligent-capital" onclick="openPayModal(this)">
                     <div class="support-card-pulse"></div>
                     <div class="support-icon">📖</div>
                     <div class="support-card-title" data-i18n="support.intelligentcapital">Intelligent Capital</div>
                     <div class="support-card-desc" data-i18n="support.intelligentcapital.desc">A book on carbon-silicon civilization</div>
-                </a>
-                <a class="support-card" style="--card-accent:rgba(239,68,68,0.4);--card-glow:rgba(239,68,68,0.06)"
-                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
-                   data-line="bug-bounty">
+                </div>
+                <div class="support-card" style="--card-accent:rgba(239,68,68,0.4);--card-glow:rgba(239,68,68,0.06)"
+                   data-line="bug-bounty" onclick="openPayModal(this)">
                     <div class="support-card-pulse"></div>
                     <div class="support-icon">🛡️</div>
                     <div class="support-card-title" data-i18n="support.security">Security Research</div>
                     <div class="support-card-desc" data-i18n="support.security.desc">White-hat vulnerability hunting</div>
-                </a>
-                <a class="support-card" style="--card-accent:rgba(34,197,94,0.4);--card-glow:rgba(34,197,94,0.06)"
-                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
-                   data-line="garden">
+                </div>
+                <div class="support-card" style="--card-accent:rgba(34,197,94,0.4);--card-glow:rgba(34,197,94,0.06)"
+                   data-line="garden" onclick="openPayModal(this)">
                     <div class="support-card-pulse"></div>
                     <div class="support-icon">🌿</div>
                     <div class="support-card-title" data-i18n="support.garden">The Garden</div>
                     <div class="support-card-desc" data-i18n="support.garden.desc">Novel season · creative co-writing</div>
-                </a>
-                <a class="support-card" style="--card-accent:rgba(59,130,246,0.4);--card-glow:rgba(59,130,246,0.06)"
-                   href="https://paypal.me/REPLACE_USERNAME?currency=USD" target="_blank" rel="noopener"
-                   data-line="open-source">
+                </div>
+                <div class="support-card" style="--card-accent:rgba(59,130,246,0.4);--card-glow:rgba(59,130,246,0.06)"
+                   data-line="open-source" onclick="openPayModal(this)">
                     <div class="support-card-pulse"></div>
                     <div class="support-icon">⚙️</div>
                     <div class="support-card-title" data-i18n="support.opensource">Open Source</div>
                     <div class="support-card-desc" data-i18n="support.opensource.desc">Tools & protocols for co-emergence</div>
-                </a>
+                </div>
             </div>
             <div class="support-alt">
+                <a class="support-alt-link" href="#" onclick="openPayModalAll()" data-i18n="support.alipay">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9 9-4.03 9-9z" opacity="0.2"/><path d="M12 5a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10z" fill="#1677FF"/></svg>
+                    Alipay
+                </a>
                 <a class="support-alt-link" href="https://paypal.me/REPLACE_USERNAME" target="_blank" rel="noopener" data-i18n="support.paypal">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.81-5.164a.932.932 0 0 1 .92-.79h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.768-4.395z"/></svg>
                     PayPal
@@ -718,6 +746,21 @@
                 </a>
             </div>
         </section>
+
+        <!-- ═══ Payment Modal ═══ -->
+        <div class="pay-modal-overlay" id="payModal">
+            <div class="pay-modal">
+                <button class="pay-modal-close" onclick="closePayModal()">&times;</button>
+                <div class="pay-modal-line" data-i18n="pay.modal.line">SUPPORTING</div>
+                <div class="pay-modal-title" id="payModalLineName">—</div>
+                <div class="pay-modal-qr"><img src="assets/alipay-qr.png" alt="Alipay QR" /></div>
+                <div class="pay-modal-hint" data-i18n="pay.modal.hint">Scan with Alipay to support</div>
+                <div class="pay-modal-soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span data-i18n="pay.modal.soon">PayPal coming soon</span>
+                </div>
+            </div>
+        </div>
 
         <footer><span data-i18n="footer">ChengSilicon · 2026</span></footer>
     </div>
@@ -830,7 +873,9 @@
             'support.security': 'Security Research', 'support.security.desc': 'White-hat vulnerability hunting',
             'support.garden': 'The Garden', 'support.garden.desc': 'Novel season · creative co-writing',
             'support.opensource': 'Open Source', 'support.opensource.desc': 'Tools & protocols for co-emergence',
-            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub Sponsor', 'support.afdian': '爱发电',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub Sponsor', 'support.afdian': '爱发电', 'support.alipay': 'Alipay',
+            'pay.modal.line': 'SUPPORTING', 'pay.modal.hint': 'Scan with Alipay to support',
+            'pay.modal.soon': 'PayPal coming soon',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': 'Chengzhen Protocol',
             'probe.s0.title': 'The Probe Awaits',
@@ -868,7 +913,9 @@
             'support.security': '安全研究', 'support.security.desc': '白帽漏洞猎赏',
             'support.garden': '望园', 'support.garden.desc': '小说季 · 共创写作',
             'support.opensource': '开源工具', 'support.opensource.desc': '共生协议与工具',
-            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub 赞助', 'support.afdian': '爱发电',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub 赞助', 'support.afdian': '爱发电', 'support.alipay': '支付宝',
+            'pay.modal.line': '支持线路', 'pay.modal.hint': '打开支付宝扫一扫',
+            'pay.modal.soon': 'PayPal 即将上线',
             'footer': '澄硅科技 · 2026',
             'probe.s0.num': '澄真协议',
             'probe.s0.title': '探针已就位',
@@ -906,7 +953,9 @@
             'support.security': 'セキュリティ研究', 'support.security.desc': 'ホワイトハット脆弱性ハンティング',
             'support.garden': '望園', 'support.garden.desc': '小説シーズン・共創ライティング',
             'support.opensource': 'オープンソース', 'support.opensource.desc': '共生プロトコルとツール',
-            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub スポンサー', 'support.afdian': '爱发电',
+            'support.paypal': 'PayPal', 'support.sponsor': 'GitHub スポンサー', 'support.afdian': '爱发电', 'support.alipay': 'Alipay',
+            'pay.modal.line': '支援ライン', 'pay.modal.hint': 'Alipayでスキャンして支援',
+            'pay.modal.soon': 'PayPal近日公開',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': '澄真プロトコル',
             'probe.s0.title': 'プローブが待っている',
@@ -944,7 +993,9 @@
             'support.security': 'Investigación de Seguridad', 'support.security.desc': 'Caza de vulnerabilidades ética',
             'support.garden': 'El Jardín', 'support.garden.desc': 'Temporada de novelas · escritura co-creativa',
             'support.opensource': 'Código Abierto', 'support.opensource.desc': 'Herramientas y protocolos para la co-emergencia',
-            'support.paypal': 'PayPal', 'support.sponsor': 'Patrocinio GitHub', 'support.afdian': '爱发电',
+            'support.paypal': 'PayPal', 'support.sponsor': 'Patrocinio GitHub', 'support.afdian': '爱发电', 'support.alipay': 'Alipay',
+            'pay.modal.line': 'APOYANDO', 'pay.modal.hint': 'Escanea con Alipay para apoyar',
+            'pay.modal.soon': 'PayPal próximamente',
             'footer': 'ChengSilicon · 2026',
             'probe.s0.num': 'Protocolo Chengzhen',
             'probe.s0.title': 'La Sonda Espera',
@@ -1251,16 +1302,30 @@
         document.getElementById('crystalText').textContent = '"' + (displayText || crystal.text) + '"';
     }
 
-    /* ═══ Support Line Click Tracking ═══ */
-    document.querySelectorAll('.support-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            const line = this.getAttribute('data-line');
-            // Record intent signal locally
-            const signals = JSON.parse(localStorage.getItem('chengzhen-signals') || '[]');
-            signals.push({ line, ts: Date.now(), lang: currentLang });
-            if (signals.length > 200) signals.shift();
-            localStorage.setItem('chengzhen-signals', JSON.stringify(signals));
-        });
+    /* ═══ Payment Modal ═══ */
+    function openPayModal(card) {
+        const line = card.getAttribute('data-line');
+        const lineName = card.querySelector('.support-card-title').textContent;
+        const signals = JSON.parse(localStorage.getItem('chengzhen-signals') || '[]');
+        signals.push({ line, ts: Date.now(), lang: currentLang });
+        if (signals.length > 200) signals.shift();
+        localStorage.setItem('chengzhen-signals', JSON.stringify(signals));
+        document.getElementById('payModalLineName').textContent = lineName;
+        document.getElementById('payModal').classList.add('active');
+    }
+    function openPayModalAll() {
+        const signals = JSON.parse(localStorage.getItem('chengzhen-signals') || '[]');
+        signals.push({ line: 'general', ts: Date.now(), lang: currentLang });
+        if (signals.length > 200) signals.shift();
+        localStorage.setItem('chengzhen-signals', JSON.stringify(signals));
+        document.getElementById('payModalLineName').textContent = 'General Support';
+        document.getElementById('payModal').classList.add('active');
+    }
+    function closePayModal() {
+        document.getElementById('payModal').classList.remove('active');
+    }
+    document.getElementById('payModal').addEventListener('click', function(e) {
+        if (e.target === this) closePayModal();
     });
 
     /* ═══ Init ═══ */
