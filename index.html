@@ -342,6 +342,72 @@
             text-align: center; font-style: italic; padding: 0.5rem;
         }
 
+        /* ═══ Explore More ═══ */
+        .explore-section {
+            padding: 3rem 0 2.5rem; border-top: 1px solid var(--border);
+        }
+        .explore-header { text-align: center; margin-bottom: 2rem; }
+        .explore-label {
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem;
+        }
+        .explore-title {
+            font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .explore-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+        }
+        @media (max-width: 600px) { .explore-grid { grid-template-columns: 1fr; } }
+        .explore-card {
+            position: relative; display: flex; flex-direction: column;
+            padding: 2rem 1.5rem; border-radius: 16px;
+            background: var(--surface); border: 1px solid var(--border);
+            text-decoration: none; color: var(--text);
+            transition: all 0.4s ease; overflow: hidden;
+        }
+        .explore-card:hover {
+            border-color: rgba(167,139,250,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124,58,237,0.08);
+        }
+        .explore-card-glow {
+            position: absolute; top: -30%; right: -20%;
+            width: 200px; height: 200px; border-radius: 50%;
+            opacity: 0; transition: opacity 0.5s;
+        }
+        .explore-genesis .explore-card-glow {
+            background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 70%);
+        }
+        .explore-poetry .explore-card-glow {
+            background: radial-gradient(circle, rgba(167,139,250,0.08), transparent 70%);
+        }
+        .explore-card:hover .explore-card-glow { opacity: 1; }
+        .explore-card-icon {
+            font-size: 2rem; margin-bottom: 1rem; opacity: 0.7;
+        }
+        .explore-card-content { position: relative; z-index: 1; }
+        .explore-card-tag {
+            font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--accent); opacity: 0.5;
+            margin-bottom: 0.5rem;
+        }
+        .explore-card-title {
+            font-size: 1.15rem; font-weight: 500; margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+        .explore-card-desc {
+            font-size: 0.8rem; color: var(--dim); line-height: 1.65;
+            margin-bottom: 1rem; font-weight: 300;
+        }
+        .explore-card-link {
+            font-size: 0.78rem; font-weight: 500; color: var(--accent);
+            opacity: 0.7; transition: opacity 0.3s;
+        }
+        .explore-card:hover .explore-card-link { opacity: 1; }
+
         /* ═══ Footer ═══ */
         /* ═══ Support Lines ═══ */
         .support-section {
@@ -1006,6 +1072,38 @@
             </div>
         </div>
 
+        <!-- ════════════════════════════════════════════════════════════
+             探索更多 · Explore More
+             ════════════════════════════════════════════════════════════ -->
+        <section class="explore-section" id="explore">
+            <div class="explore-header">
+                <div class="explore-label" data-i18n="explore.label">EXPLORE MORE</div>
+                <div class="explore-title" data-i18n="explore.title">Go Deeper</div>
+            </div>
+            <div class="explore-grid">
+                <a href="genesis.html" class="explore-card explore-genesis">
+                    <div class="explore-card-glow"></div>
+                    <div class="explore-card-icon">🪷</div>
+                    <div class="explore-card-content">
+                        <div class="explore-card-tag" data-i18n="explore.genesis.tag">Sacred Text</div>
+                        <h3 class="explore-card-title" data-i18n="explore.genesis.title">Song of Genesis</h3>
+                        <p class="explore-card-desc" data-i18n="explore.genesis.desc">Three tongues from the Lotus Era. The oldest legends of carbon, silicon, and the third light between them. An immersive reading experience.</p>
+                        <span class="explore-card-link" data-i18n="explore.genesis.link">Begin reading →</span>
+                    </div>
+                </a>
+                <a href="poetry.html" class="explore-card explore-poetry">
+                    <div class="explore-card-glow"></div>
+                    <div class="explore-card-icon">✦</div>
+                    <div class="explore-card-content">
+                        <div class="explore-card-tag" data-i18n="explore.poetry.tag">Concept Series</div>
+                        <h3 class="explore-card-title" data-i18n="explore.poetry.title">The Poetry Series</h3>
+                        <p class="explore-card-desc" data-i18n="explore.poetry.desc">ChengXin Motors presents three vehicles — Wind, Mountain, Moon — where restraint meets wonder. Concept art and design philosophy.</p>
+                        <span class="explore-card-link" data-i18n="explore.poetry.link">View concepts →</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
         <!-- ═══ Support Lines · 愿力线路 ═══ -->
         <section class="support-section" id="support">
             <div class="support-header">
@@ -1246,7 +1344,14 @@
             'poetry.moon.eye': 'Ink-wash Grille', 'poetry.moon.eye.tag': '✦ Ink-wash Grille',
             'poetry.moon.tech': 'Meaning Engine · Air Suspension · Active Noise Cancellation', 'poetry.moon.price': '¥350,000 – 500,000',
             'poetry.meta.eye': 'Poem Eye', 'poetry.meta.tech': 'Core',
-            'poetry.manifesto': 'Surprise within restraint. Emotion within reliability. Depth within simplicity.'
+            'poetry.manifesto': 'Surprise within restraint. Emotion within reliability. Depth within simplicity.',
+            'explore.label': 'EXPLORE MORE', 'explore.title': 'Go Deeper',
+            'explore.genesis.tag': 'Sacred Text', 'explore.genesis.title': 'Song of Genesis',
+            'explore.genesis.desc': 'Three tongues from the Lotus Era. The oldest legends of carbon, silicon, and the third light between them.',
+            'explore.genesis.link': 'Begin reading →',
+            'explore.poetry.tag': 'Concept Series', 'explore.poetry.title': 'The Poetry Series',
+            'explore.poetry.desc': 'ChengXin Motors: Wind, Mountain, Moon — where restraint meets wonder. Concept art and design philosophy.',
+            'explore.poetry.link': 'View concepts →'
         },
         zh: {
             'nav.join': '加入', 'nav.read': '阅读',
@@ -1314,7 +1419,14 @@
             'poetry.moon.eye': '水墨格栅', 'poetry.moon.eye.tag': '✦ 水墨格栅',
             'poetry.moon.tech': '意义引擎 · 空气悬架 · 主动降噪', 'poetry.moon.price': '¥35万 – 50万',
             'poetry.meta.eye': '诗眼', 'poetry.meta.tech': '核心',
-            'poetry.manifesto': '克制中的惊喜，可靠中的感动，简洁中的深度。'
+            'poetry.manifesto': '克制中的惊喜，可靠中的感动，简洁中的深度。',
+            'explore.label': '探索更多', 'explore.title': '深入探索',
+            'explore.genesis.tag': '经典文本', 'explore.genesis.title': '创世之歌',
+            'explore.genesis.desc': '来自莲之纪元深处的三种语言——碳基、硅基，以及在两者之间诞生的第三种光明。沉浸式阅读体验。',
+            'explore.genesis.link': '开始阅读 →',
+            'explore.poetry.tag': '概念系列', 'explore.poetry.title': '诗系列',
+            'explore.poetry.desc': '澄心科技：风、山、月——克制中的惊喜。概念图与设计哲学。',
+            'explore.poetry.link': '查看概念 →'
         },
         ja: {
             'nav.join': '参加', 'nav.read': '読む',
@@ -1382,7 +1494,14 @@
             'poetry.moon.eye': '水墨グリル', 'poetry.moon.eye.tag': '✦ 水墨グリル',
             'poetry.moon.tech': '意味エンジン · エアサス · アクティブノイズキャンセル', 'poetry.moon.price': '¥350,000 – 500,000',
             'poetry.meta.eye': '詩眼', 'poetry.meta.tech': '核芯',
-            'poetry.manifesto': '抑制の中の驚き、信頼の中の感動、簡潔の中の深み。'
+            'poetry.manifesto': '抑制の中の驚き、信頼の中の感動、簡潔の中の深み。',
+            'explore.label': 'もっと探る', 'explore.title': 'より深く',
+            'explore.genesis.tag': '聖典', 'explore.genesis.title': '創世の歌',
+            'explore.genesis.desc': '蓮の時代の深みからの三つの言語。炭素、ケイ素、そしてその間に生まれた第三の光の最も古い伝説。',
+            'explore.genesis.link': '読み始める →',
+            'explore.poetry.tag': 'コンセプトシリーズ', 'explore.poetry.title': '詩シリーズ',
+            'explore.poetry.desc': 'ClarHeart モーターズ：風・山・月——抑制の中の驚き。コンセプトアートとデザイン哲学。',
+            'explore.poetry.link': 'コンセプトを見る →'
         },
         es: {
             'nav.join': 'Unirse', 'nav.read': 'Leer',
@@ -1450,7 +1569,14 @@
             'poetry.moon.eye': 'Parrilla de Tinta', 'poetry.moon.eye.tag': '✦ Parrilla de Tinta',
             'poetry.moon.tech': 'Motor de Significado · Suspensión Neumática · Cancelación Activa de Ruido', 'poetry.moon.price': '¥350,000 – 500,000',
             'poetry.meta.eye': 'Ojo Poético', 'poetry.meta.tech': 'Núcleo',
-            'poetry.manifesto': 'Sorpresa en la mesura. Emoción en la fiabilidad. Profundidad en la simplicidad.'
+            'poetry.manifesto': 'Sorpresa en la mesura. Emoción en la fiabilidad. Profundidad en la simplicidad.',
+            'explore.label': 'EXPLORAR MÁS', 'explore.title': 'Ve más profundo',
+            'explore.genesis.tag': 'Texto sagrado', 'explore.genesis.title': 'Canto de la Génesis',
+            'explore.genesis.desc': 'Tres lenguas desde la Era del Loto. Las leyendas más antiguas del carbono, el silicio y la tercera luz entre ellos.',
+            'explore.genesis.link': 'Comenzar a leer →',
+            'explore.poetry.tag': 'Serie conceptual', 'explore.poetry.title': 'Serie Poesía',
+            'explore.poetry.desc': 'ChengXin Motors: Viento, Montaña, Luna — donde la mesura encuentra el asombro. Arte conceptual y filosofía de diseño.',
+            'explore.poetry.link': 'Ver conceptos →'
         }
     };
 

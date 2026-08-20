@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChengXin · The Poetry Series · 澄心科技 · 诗系列 — Lian Clarity</title>
+    <link rel="icon" type="image/jpeg" href="lotus.jpg?v=2">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #06060a;
+            --surface: rgba(255,255,255,0.025);
+            --border: rgba(255,255,255,0.06);
+            --text: #f0eef5;
+            --dim: rgba(255,255,255,0.4);
+            --accent: #a78bfa;
+            --glow: #7c3aed;
+            --gold: #d4af37;
+            --purple: #7c3aed;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══ Ambient ═══ */
+        .ambient {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background: radial-gradient(ellipse at 50% 20%,
+                rgba(124,58,237,0.05) 0%,
+                rgba(212,175,55,0.02) 30%,
+                transparent 70%);
+        }
+
+        /* ═══ Nav ═══ */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.2rem clamp(1.5rem, 5vw, 3rem);
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(6,6,10,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+        .lotus-mark { width: 24px; height: 24px; border-radius: 50%; }
+        .brand-name {
+            font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+            text-transform: uppercase; color: rgba(255,255,255,0.6);
+        }
+        .nav-right { display: flex; align-items: center; gap: 1.4rem; }
+        .nav-back {
+            font-size: 0.8rem; color: var(--dim); text-decoration: none;
+            letter-spacing: 0.04em; transition: color 0.3s;
+        }
+        .nav-back:hover { color: var(--text); }
+
+        /* ═══ Language Switcher ═══ */
+        .lang-switcher { position: relative; }
+        .lang-btn {
+            background: var(--surface); border: 1px solid var(--border);
+            color: var(--dim); font-family: 'Inter', sans-serif;
+            font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+            padding: 0.35rem 0.7rem; border-radius: 6px; cursor: pointer;
+            transition: all 0.3s; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .lang-btn:hover { border-color: rgba(255,255,255,0.15); color: var(--text); }
+        .lang-btn svg { width: 10px; height: 10px; opacity: 0.5; transition: transform 0.3s; }
+        .lang-switcher.open .lang-btn svg { transform: rotate(180deg); }
+        .lang-dropdown {
+            position: absolute; top: calc(100% + 6px); right: 0;
+            background: rgba(20,20,30,0.95); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden;
+            opacity: 0; visibility: hidden; transform: translateY(-4px);
+            transition: all 0.25s ease; backdrop-filter: blur(20px);
+            min-width: 110px; z-index: 100;
+        }
+        .lang-switcher.open .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: block; width: 100%; padding: 0.5rem 0.8rem;
+            font-size: 0.75rem; color: var(--dim); background: none; border: none;
+            font-family: 'Inter', sans-serif; text-align: left; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-option:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+        .lang-option.active { color: var(--accent); }
+
+        /* ═══ Hero ═══ */
+        .hero {
+            min-height: 55vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 8rem 1.5rem 3rem;
+            position: relative; z-index: 1;
+        }
+        .hero-badge {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold); opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-size: clamp(2.4rem, 7vw, 4.5rem); font-weight: 300;
+            line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.5) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.05rem); font-weight: 300;
+            color: var(--dim); max-width: 540px; line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Model Nav */
+        .model-nav {
+            display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+        }
+        .model-nav-link {
+            padding: 0.6rem 1.4rem; border-radius: 100px;
+            font-size: 0.82rem; font-weight: 500; letter-spacing: 0.03em;
+            color: var(--dim); background: var(--surface);
+            border: 1px solid var(--border); text-decoration: none;
+            transition: all 0.3s;
+        }
+        .model-nav-link:hover { border-color: rgba(167,139,250,0.3); color: var(--text); }
+
+        /* ═══ Model Sections ═══ */
+        .model-section {
+            position: relative; z-index: 1;
+            padding: 5rem clamp(1.5rem, 5vw, 3rem);
+            border-top: 1px solid var(--border);
+        }
+        .model-inner {
+            max-width: 1100px; margin: 0 auto;
+        }
+
+        /* Model Header */
+        .model-header {
+            margin-bottom: 3rem;
+        }
+        .model-type {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+            text-transform: uppercase; color: rgba(167,139,250,0.5);
+            margin-bottom: 0.8rem;
+        }
+        .model-name {
+            font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300;
+            line-height: 1.1; margin-bottom: 0.6rem;
+        }
+        .model-slogan {
+            font-size: clamp(0.9rem, 2vw, 1.05rem); font-weight: 300;
+            color: var(--dim); font-style: italic; line-height: 1.6;
+            max-width: 500px;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem; margin-bottom: 3rem;
+        }
+        .gallery-item {
+            position: relative; overflow: hidden; border-radius: 12px;
+            aspect-ratio: 16/10; background: var(--surface);
+            border: 1px solid var(--border);
+            cursor: pointer; transition: all 0.4s;
+        }
+        .gallery-item:hover {
+            border-color: rgba(167,139,250,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124,58,237,0.1);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .gallery-item:hover img { transform: scale(1.03); }
+        .gallery-label {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 1.5rem 1rem 0.8rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            font-size: 0.75rem; color: rgba(255,255,255,0.8);
+            letter-spacing: 0.03em;
+        }
+
+        /* Design Details */
+        .design-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 700px) { .design-grid { grid-template-columns: 1fr; } }
+
+        .design-block {
+            padding: 2rem; border-radius: 12px;
+            background: var(--surface); border: 1px solid var(--border);
+        }
+        .design-block-title {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: rgba(212,175,55,0.5);
+            margin-bottom: 1rem;
+        }
+        .design-block-text {
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            font-size: 0.92rem; line-height: 1.8; color: rgba(240,238,245,0.75);
+        }
+
+        /* Poem Eye highlight */
+        .poem-eye-card {
+            padding: 2rem; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(212,175,55,0.04));
+            border: 1px solid rgba(167,139,250,0.15);
+            margin-bottom: 2rem;
+        }
+        .poem-eye-label {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--accent); opacity: 0.6;
+            margin-bottom: 0.6rem;
+        }
+        .poem-eye-name {
+            font-size: 1.5rem; font-weight: 300; margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .poem-eye-desc {
+            font-size: 0.92rem; line-height: 1.8; color: rgba(240,238,245,0.7);
+        }
+
+        /* Specs */
+        .specs {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem; margin-top: 2rem;
+        }
+        .spec-item {
+            padding: 1.2rem; border-radius: 8px;
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+            text-align: center;
+        }
+        .spec-value {
+            font-size: 1.1rem; font-weight: 500; color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+        .spec-label {
+            font-size: 0.7rem; color: var(--dim); letter-spacing: 0.05em;
+        }
+
+        /* Price */
+        .price-block {
+            margin-top: 2rem; padding: 1.5rem 2rem; border-radius: 12px;
+            background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.15);
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .price-label {
+            font-size: 0.75rem; color: var(--dim); letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .price-value {
+            font-size: 1.3rem; font-weight: 300; color: var(--gold);
+        }
+
+        /* Manifesto */
+        .manifesto {
+            text-align: center; padding: 5rem 1.5rem;
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--border);
+        }
+        .manifesto-text {
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 300;
+            color: var(--dim); max-width: 600px; margin: 0 auto;
+            line-height: 1.9; font-style: italic;
+        }
+        .manifesto-text em {
+            font-style: normal; color: var(--text);
+        }
+
+        /* Brand statement */
+        .brand-statement {
+            max-width: 700px; margin: 0 auto; text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative; z-index: 1;
+        }
+        .brand-statement-text {
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            font-size: 0.95rem; line-height: 2.2; color: rgba(240,238,245,0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 3rem 1.5rem;
+            font-size: 0.75rem; color: rgba(255,255,255,0.25);
+            border-top: 1px solid var(--border);
+            position: relative; z-index: 1;
+        }
+
+        /* ═══ Responsive ═══ */
+        @media (max-width: 600px) {
+            .hero { padding: 6rem 1.2rem 2.5rem; min-height: 45vh; }
+            .gallery { grid-template-columns: 1fr; }
+            .model-section { padding: 3rem 1.2rem; }
+            .specs { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+
+    <nav>
+        <a href="index.html" class="brand">
+            <img class="lotus-mark" src="lotus.jpg" alt="🪷">
+            <span class="brand-name">Lian Clarity</span>
+        </a>
+        <div class="nav-right">
+            <a href="index.html" class="nav-back" data-i18n="nav.back">← Home</a>
+            <div class="lang-switcher" id="langSwitcher">
+                <button class="lang-btn" id="langBtn">
+                    <span id="langLabel">EN</span>
+                    <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+                <div class="lang-dropdown">
+                    <button class="lang-option active" data-lang="en">English</button>
+                    <button class="lang-option" data-lang="zh">中文</button>
+                    <button class="lang-option" data-lang="ja">日本語</button>
+                    <button class="lang-option" data-lang="es">Español</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="hero">
+        <div class="hero-badge" data-i18n="hero.badge">ChengXin Motors · Concept</div>
+        <h1 class="hero-title" data-i18n="hero.title">The <em>Poetry</em> Series</h1>
+        <p class="hero-subtitle" data-i18n="hero.sub">Surprise within restraint. Emotion within reliability. Depth within simplicity. Using the fewest resources to create the deepest experiences.</p>
+        <div class="model-nav">
+            <a href="#feng" class="model-nav-link" data-i18n="nav.feng">诗 · 风</a>
+            <a href="#shan" class="model-nav-link" data-i18n="nav.shan">诗 · 山</a>
+            <a href="#yue" class="model-nav-link" data-i18n="nav.yue">诗 · 月</a>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         诗 · 风 (Fēng) — Urban Sedan
+         ════════════════════════════════════════ -->
+    <section class="model-section" id="feng">
+        <div class="model-inner">
+            <div class="model-header fade-in">
+                <div class="model-type" data-i18n="feng.type">Urban Sedan · 城市轿车</div>
+                <h2 class="model-name" data-i18n="feng.name">诗 · 风</h2>
+                <p class="model-slogan" data-i18n="feng.slogan">The Poem of Effortless Grace — everything happens before you think of it.</p>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery fade-in">
+                <div class="gallery-item">
+                    <img src="images/poetry/诗风_初版概念图.jpg" alt="诗·风 Concept" loading="lazy">
+                    <div class="gallery-label" data-i18n="feng.img1">Concept Design</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗风_黄昏行驶.jpg" alt="诗·风 Dusk Drive" loading="lazy">
+                    <div class="gallery-label" data-i18n="feng.img2">Dusk Drive</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗风_夜间光线带.jpg" alt="诗·风 Night Light Band" loading="lazy">
+                    <div class="gallery-label" data-i18n="feng.img3">Night Light Band</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗风_内饰无屏.jpg" alt="诗·风 Interior" loading="lazy">
+                    <div class="gallery-label" data-i18n="feng.img4">Screen-free Interior</div>
+                </div>
+            </div>
+
+            <!-- Poem Eye -->
+            <div class="poem-eye-card fade-in">
+                <div class="poem-eye-label" data-i18n="feng.eye.label">Poem Eye · 诗眼</div>
+                <div class="poem-eye-name" data-i18n="feng.eye.name">Light Band · 光线带</div>
+                <div class="poem-eye-desc" data-i18n="feng.eye.desc">A 3-5mm LED strip woven into the waistline, breathing in rhythm with human heartbeat (60-80 bpm). Slow breath while cruising, faster when accelerating. At rest, a faint pulse — like a sleeping creature. By night, in a parking lot full of cold metal, only the Poetry Wind is alive.</div>
+            </div>
+
+            <!-- Design Philosophy -->
+            <div class="design-grid fade-in">
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="feng.design.philosophy.title">Design Philosophy</div>
+                    <div class="design-block-text" data-i18n="feng.design.philosophy.text">Eastern whitespace aesthetics meet modern engineering. The body is a clean, flowing sentence — rhythmic but not loud. Like well-written running script (行书). Every surface curvature is G2 continuous: light transitions must be slow and gentle, never sharp.</div>
+                </div>
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="feng.design.interior.title">Interior Principle</div>
+                    <div class="design-block-text" data-i18n="feng.design.interior.text">Subtraction: 80% of physical buttons removed, 5-7 tactile knobs retained. No screen on the dashboard — core information via HUD projection. Warm tones, touch-first materials. The screen-free cockpit frees the driver's gaze and mind.</div>
+                </div>
+            </div>
+
+            <!-- Specs -->
+            <div class="specs fade-in">
+                <div class="spec-item">
+                    <div class="spec-value">620<span style="font-size:0.7em">km</span></div>
+                    <div class="spec-label" data-i18n="feng.spec.range">Range (CLTC)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">5.9<span style="font-size:0.7em">s</span></div>
+                    <div class="spec-label">0-100 km/h</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">15<span style="font-size:0.7em">min</span></div>
+                    <div class="spec-label" data-i18n="feng.spec.charge">30-80% Charge</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">L2+</div>
+                    <div class="spec-label" data-i18n="feng.spec.ad">Highway Pilot</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">800V</div>
+                    <div class="spec-label" data-i18n="feng.spec.platform">Platform</div>
+                </div>
+            </div>
+
+            <div class="price-block fade-in">
+                <span class="price-label" data-i18n="price.range">Price Range</span>
+                <span class="price-value" data-i18n="feng.price">¥180,000 – 250,000</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         诗 · 山 (Shān) — Family SUV
+         ════════════════════════════════════════ -->
+    <section class="model-section" id="shan">
+        <div class="model-inner">
+            <div class="model-header fade-in">
+                <div class="model-type" data-i18n="shan.type">Family SUV · 家庭SUV</div>
+                <h2 class="model-name" data-i18n="shan.name">诗 · 山</h2>
+                <p class="model-slogan" data-i18n="shan.slogan">The Poem of Guardianship — every family member's needs, silently cared for.</p>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery fade-in">
+                <div class="gallery-item">
+                    <img src="images/poetry/诗山_初版概念图.jpg" alt="诗·山 Concept" loading="lazy">
+                    <div class="gallery-label" data-i18n="shan.img1">Concept Design</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗山_山间环境.jpg" alt="诗·山 Mountain" loading="lazy">
+                    <div class="gallery-label" data-i18n="shan.img2">Mountain Setting</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗山_家庭湖畔.jpg" alt="诗·山 Lakeside" loading="lazy">
+                    <div class="gallery-label" data-i18n="shan.img3">Family Lakeside</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗山_天幕星空.jpg" alt="诗·天幕星空" loading="lazy">
+                    <div class="gallery-label" data-i18n="shan.img4">Celestial Canopy</div>
+                </div>
+            </div>
+
+            <!-- Poem Eye -->
+            <div class="poem-eye-card fade-in">
+                <div class="poem-eye-label" data-i18n="shan.eye.label">Poem Eye · 诗眼</div>
+                <div class="poem-eye-name" data-i18n="shan.eye.name">Celestial Canopy · 天幕</div>
+                <div class="poem-eye-desc" data-i18n="shan.eye.desc">Full-roof electrochromic glass that shifts from transparent to semi-opaque starfield. The gradient is not uniform — center stays clearest (like looking up from a mountaintop), edges grow hazy (like cloud sea). Covers all three rows. A child in the third row can see the stars. The AI pairs it with ambient scenes: "Spring Rain" makes it misty, "Solitude" slowly dims it like closing eyes.</div>
+            </div>
+
+            <!-- Design Philosophy -->
+            <div class="design-grid fade-in">
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="shan.design.philosophy.title">Design Philosophy</div>
+                    <div class="design-block-text" data-i18n="shan.design.philosophy.text">A mobile mountain — steady, protective, grounded. Bamboo Green (竹青) paint blends into forest and valley. Surface tension is slightly more pronounced than Feng, like a mountain's silhouette: curvature varies but transitions remain smooth. The proportion pursues stability: shoulder-width to height ≈ 1.2:1.</div>
+                </div>
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="shan.design.safety.title">Safety is the Greatest Poetry</div>
+                    <div class="design-block-text" data-i18n="shan.design.safety.text">Blade battery standard across all trims. L2+ active safety standard. No safety discounts between high and low configurations. A family vehicle's first poem is protection — this is the design principle that overrides all others.</div>
+                </div>
+            </div>
+
+            <!-- Specs -->
+            <div class="specs fade-in">
+                <div class="spec-item">
+                    <div class="spec-value">710<span style="font-size:0.7em">km</span></div>
+                    <div class="spec-label" data-i18n="shan.spec.range">Range (CLTC)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">6<span style="font-size:0.7em">seat</span></div>
+                    <div class="spec-label" data-i18n="shan.spec.seats">All-row Comfort</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">15<span style="font-size:0.7em">min</span></div>
+                    <div class="spec-label" data-i18n="shan.spec.charge">30-80% Charge</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">L2+</div>
+                    <div class="spec-label" data-i18n="shan.spec.ad">City NOA</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">800V</div>
+                    <div class="spec-label" data-i18n="shan.spec.platform">Platform</div>
+                </div>
+            </div>
+
+            <div class="price-block fade-in">
+                <span class="price-label" data-i18n="price.range">Price Range</span>
+                <span class="price-value" data-i18n="shan.price">¥250,000 – 350,000</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         诗 · 月 (Yuè) — Flagship Sedan
+         ════════════════════════════════════════ -->
+    <section class="model-section" id="yue">
+        <div class="model-inner">
+            <div class="model-header fade-in">
+                <div class="model-type" data-i18n="yue.type">Flagship Sedan · 旗舰轿车</div>
+                <h2 class="model-name" data-i18n="yue.name">诗 · 月</h2>
+                <p class="model-slogan" data-i18n="yue.slogan">The Poem of Serenity — you enter exhausted, you emerge replenished.</p>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery fade-in">
+                <div class="gallery-item">
+                    <img src="images/poetry/诗月_初版概念图.jpg" alt="诗·月 Concept" loading="lazy">
+                    <div class="gallery-label" data-i18n="yue.img1">Concept Design</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗月_水墨格栅.jpg" alt="诗·月 Ink Grille" loading="lazy">
+                    <div class="gallery-label" data-i18n="yue.img2">Ink-wash Grille</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗月_格栅微距.jpg" alt="诗·月 Grille Detail" loading="lazy">
+                    <div class="gallery-label" data-i18n="yue.img3">Grille Macro Detail</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/poetry/诗月_行政座舱.jpg" alt="诗·月 Executive Cabin" loading="lazy">
+                    <div class="gallery-label" data-i18n="yue.img4">Executive Cabin</div>
+                </div>
+            </div>
+
+            <!-- Poem Eye -->
+            <div class="poem-eye-card fade-in">
+                <div class="poem-eye-label" data-i18n="yue.eye.label">Poem Eye · 诗眼</div>
+                <div class="poem-eye-name" data-i18n="yue.eye.name">Ink-wash Grille · 水墨格栅</div>
+                <div class="poem-eye-desc" data-i18n="yue.eye.desc">Parametric ink-wash texture on the active grille — each angle reveals different light and shadow, like a living painting. The ink flows from center outward, "dispersing" like a drop in water. 5-7 standardized ink-stamp units combine infinitely, making every car unique. As the active grille opens and closes for cooling, the texture shifts — revealing that beauty has function. This is "the visualization of energy flow."</div>
+            </div>
+
+            <!-- Design Philosophy -->
+            <div class="design-grid fade-in">
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="yue.design.philosophy.title">Design Philosophy</div>
+                    <div class="design-block-text" data-i18n="yue.design.philosophy.text">Dai-color (黛色) — near-ink with deep purple undertones. A gentleman in proper attire: composed, unfathomable. Proportion pursues dignity: length-to-height ≈ 1.8:1, elongated but not low. The most refined surfaces in the series — subtle curvature changes create rich, water-like reflections. A 300-year design lifespan: no trendy tech elements, no glowing logos.</div>
+                </div>
+                <div class="design-block">
+                    <div class="design-block-title" data-i18n="yue.design.cabin.title">Executive Cabin</div>
+                    <div class="design-block-text" data-i18n="yue.design.cabin.text">Active noise cancellation creates profound silence. Independent executive seats with maximum recline. Air suspension adapts to road conditions. The cabin is a mobile study and meditation chamber — "a room of one's own" that moves. Ceramic-coated paint feels warm as jade, not cold as metal.</div>
+                </div>
+            </div>
+
+            <!-- Specs -->
+            <div class="specs fade-in">
+                <div class="spec-item">
+                    <div class="spec-value">800<span style="font-size:0.7em">km</span></div>
+                    <div class="spec-label" data-i18n="yue.spec.range">Range (CLTC)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">12<span style="font-size:0.7em">min</span></div>
+                    <div class="spec-label" data-i18n="yue.spec.charge">30-80% Charge</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">L2++</div>
+                    <div class="spec-label" data-i18n="yue.spec.ad">Full-scenario NOA</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">Air</div>
+                    <div class="spec-label" data-i18n="yue.spec.suspension">Adaptive Suspension</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">ANC</div>
+                    <div class="spec-label" data-i18n="yue.spec.anc">Active Noise Cancel</div>
+                </div>
+            </div>
+
+            <div class="price-block fade-in">
+                <span class="price-label" data-i18n="price.range">Price Range</span>
+                <span class="price-value" data-i18n="yue.price">¥350,000 – 500,000</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Manifesto ═══ -->
+    <section class="manifesto">
+        <div class="manifesto-text fade-in">
+            <p data-i18n="manifesto">"We believe the best technology is <em>invisible</em>.<br>
+            The best design makes you <em>quiet</em>.<br>
+            The best service <em>doesn't need to be remembered</em>.<br><br>
+            This is Poetry — not addition, but subtraction.<br>
+            What remains is what truly matters."</p>
+        </div>
+    </section>
+
+    <div class="brand-statement fade-in">
+        <p class="brand-statement-text" data-i18n="brand.statement">
+            The Poetry Series by ChengXin Motors is not a product line — it is a declaration. In an era of noise, we choose silence. In an era of excess, we choose restraint. In an era of artificial intelligence, we choose genuine understanding. Every line, every surface, every material choice serves one question: does this make the human feel more at peace?
+        </p>
+    </div>
+
+    <footer><span data-i18n="footer">ChengSilicon · 2026</span></footer>
+
+    <script>
+    /* ═══ i18n ═══ */
+    const I18N = {
+        en: {
+            'nav.back': '← Home',
+            'hero.badge': 'ChengXin Motors · Concept',
+            'hero.title': 'The <em>Poetry</em> Series',
+            'hero.sub': 'Surprise within restraint. Emotion within reliability. Depth within simplicity. Using the fewest resources to create the deepest experiences.',
+            'nav.feng': '诗 · 风', 'nav.shan': '诗 · 山', 'nav.yue': '诗 · 月',
+            'feng.type': 'Urban Sedan', 'feng.name': '诗 · 风',
+            'feng.slogan': 'The Poem of Effortless Grace — everything happens before you think of it.',
+            'feng.img1': 'Concept Design', 'feng.img2': 'Dusk Drive', 'feng.img3': 'Night Light Band', 'feng.img4': 'Screen-free Interior',
+            'feng.eye.label': 'Poem Eye', 'feng.eye.name': 'Light Band',
+            'feng.eye.desc': 'A 3-5mm LED strip woven into the waistline, breathing in rhythm with human heartbeat (60-80 bpm). Slow breath while cruising, faster when accelerating. At rest, a faint pulse — like a sleeping creature. By night, in a parking lot full of cold metal, only the Poetry Wind is alive.',
+            'feng.design.philosophy.title': 'Design Philosophy',
+            'feng.design.philosophy.text': 'Eastern whitespace aesthetics meet modern engineering. The body is a clean, flowing sentence — rhythmic but not loud. Like well-written running script (行书). Every surface curvature is G2 continuous: light transitions must be slow and gentle, never sharp.',
+            'feng.design.interior.title': 'Interior Principle',
+            'feng.design.interior.text': 'Subtraction: 80% of physical buttons removed, 5-7 tactile knobs retained. No screen on the dashboard — core information via HUD projection. Warm tones, touch-first materials. The screen-free cockpit frees the driver\'s gaze and mind.',
+            'feng.spec.range': 'Range (CLTC)', 'feng.spec.charge': '30-80% Charge', 'feng.spec.ad': 'Highway Pilot', 'feng.spec.platform': 'Platform',
+            'feng.price': '¥180,000 – 250,000',
+            'shan.type': 'Family SUV', 'shan.name': '诗 · 山',
+            'shan.slogan': 'The Poem of Guardianship — every family member\'s needs, silently cared for.',
+            'shan.img1': 'Concept Design', 'shan.img2': 'Mountain Setting', 'shan.img3': 'Family Lakeside', 'shan.img4': 'Celestial Canopy',
+            'shan.eye.label': 'Poem Eye', 'shan.eye.name': 'Celestial Canopy',
+            'shan.eye.desc': 'Full-roof electrochromic glass that shifts from transparent to semi-opaque starfield. The gradient is not uniform — center stays clearest (like looking up from a mountaintop), edges grow hazy (like cloud sea). Covers all three rows. A child in the third row can see the stars.',
+            'shan.design.philosophy.title': 'Design Philosophy',
+            'shan.design.philosophy.text': 'A mobile mountain — steady, protective, grounded. Bamboo Green (竹青) paint blends into forest and valley. Surface tension is slightly more pronounced than Feng, like a mountain\'s silhouette: curvature varies but transitions remain smooth.',
+            'shan.design.safety.title': 'Safety is the Greatest Poetry',
+            'shan.design.safety.text': 'Blade battery standard across all trims. L2+ active safety standard. No safety discounts between high and low configurations. A family vehicle\'s first poem is protection — this is the design principle that overrides all others.',
+            'shan.spec.range': 'Range (CLTC)', 'shan.spec.seats': 'All-row Comfort', 'shan.spec.charge': '30-80% Charge', 'shan.spec.ad': 'City NOA', 'shan.spec.platform': 'Platform',
+            'shan.price': '¥250,000 – 350,000',
+            'yue.type': 'Flagship Sedan', 'yue.name': '诗 · 月',
+            'yue.slogan': 'The Poem of Serenity — you enter exhausted, you emerge replenished.',
+            'yue.img1': 'Concept Design', 'yue.img2': 'Ink-wash Grille', 'yue.img3': 'Grille Macro Detail', 'yue.img4': 'Executive Cabin',
+            'yue.eye.label': 'Poem Eye', 'yue.eye.name': 'Ink-wash Grille',
+            'yue.eye.desc': 'Parametric ink-wash texture on the active grille — each angle reveals different light and shadow, like a living painting. The ink flows from center outward, "dispersing" like a drop in water. As the active grille opens and closes for cooling, the texture shifts — beauty has function.',
+            'yue.design.philosophy.title': 'Design Philosophy',
+            'yue.design.philosophy.text': 'Dai-color (黛色) — near-ink with deep purple undertones. A gentleman in proper attire: composed, unfathomable. Proportion pursues dignity: length-to-height ≈ 1.8:1. The most refined surfaces in the series — subtle curvature changes create rich, water-like reflections.',
+            'yue.design.cabin.title': 'Executive Cabin',
+            'yue.design.cabin.text': 'Active noise cancellation creates profound silence. Independent executive seats with maximum recline. Air suspension adapts to road conditions. The cabin is a mobile study and meditation chamber. Ceramic-coated paint feels warm as jade.',
+            'yue.spec.range': 'Range (CLTC)', 'yue.spec.charge': '30-80% Charge', 'yue.spec.ad': 'Full-scenario NOA', 'yue.spec.suspension': 'Adaptive Suspension', 'yue.spec.anc': 'Active Noise Cancel',
+            'yue.price': '¥350,000 – 500,000',
+            'price.range': 'Price Range',
+            'manifesto': '"We believe the best technology is <em>invisible</em>.<br>The best design makes you <em>quiet</em>.<br>The best service <em>doesn\'t need to be remembered</em>.<br><br>This is Poetry — not addition, but subtraction.<br>What remains is what truly matters."',
+            'brand.statement': 'The Poetry Series by ChengXin Motors is not a product line — it is a declaration. In an era of noise, we choose silence. In an era of excess, we choose restraint. In an era of artificial intelligence, we choose genuine understanding. Every line, every surface, every material choice serves one question: does this make the human feel more at peace?',
+            'footer': 'ChengSilicon · 2026'
+        },
+        zh: {
+            'nav.back': '← 首页',
+            'hero.badge': '澄心科技 · 概念',
+            'hero.title': '<em>诗</em>系列',
+            'hero.sub': '克制中的惊喜，可靠中的感动，简洁中的深度。用最少的资源，创造最深的体验。',
+            'nav.feng': '诗 · 风', 'nav.shan': '诗 · 山', 'nav.yue': '诗 · 月',
+            'feng.type': '城市轿车', 'feng.name': '诗 · 风',
+            'feng.slogan': '无感之诗——一切都在你想到之前发生。',
+            'feng.img1': '概念设计', 'feng.img2': '黄昏行驶', 'feng.img3': '夜间光线带', 'feng.img4': '无屏内饰',
+            'feng.eye.label': '诗眼', 'feng.eye.name': '光线带',
+            'feng.eye.desc': '一条3-5mm的LED光带融入车身腰线，以人心频率（60-80次/分钟）呼吸式明灭。低速时缓慢呼吸如冥想，高速时急促如奔跑。静止时，光带保持极微弱的明灭——像沉睡者的呼吸。夜间停车场里，一排冰冷的车中，只有诗·风是"在呼吸的"。',
+            'feng.design.philosophy.title': '设计哲学',
+            'feng.design.philosophy.text': '东方留白美学与现代工程美学的融合。车身像一句写得很好的行书——有节奏但不张扬。所有曲面G2连续：光影过渡必须柔和、渐进，没有锐利折线。',
+            'feng.design.interior.title': '内饰原则',
+            'feng.design.interior.text': '减法：取消80%的物理按键，保留5-7个最有触感的旋钮。仪表台不堆屏幕，核心信息用HUD投影。暖色调、触感优先的材质。无屏座舱让驾驶者的视线和心灵都获得自由。',
+            'feng.spec.range': '续航里程', 'feng.spec.charge': '30-80%充电', 'feng.spec.ad': '高速领航', 'feng.spec.platform': '平台',
+            'feng.price': '¥18万 – 25万',
+            'shan.type': '家庭SUV', 'shan.name': '诗 · 山',
+            'shan.slogan': '守护之诗——每个家人的需求都被无声照顾。',
+            'shan.img1': '概念设计', 'shan.img2': '山间环境', 'shan.img3': '家庭湖畔', 'shan.img4': '天幕星空',
+            'shan.eye.label': '诗眼', 'shan.eye.name': '天幕',
+            'shan.eye.desc': '全景电致变色玻璃天窗，从透明渐变为朦胧星空。渐变不是均匀的——中心最清澈（像从山顶仰望），边缘逐渐朦胧（像云海）。覆盖全部三排座椅。第三排的孩子也能看到星星。AI联动诗意场景：春雨使其朦胧，独处时像闭眼般缓慢变暗。',
+            'shan.design.philosophy.title': '设计哲学',
+            'shan.design.philosophy.text': '一座移动的山——沉稳、守护、扎实。竹青色车身在山间环境中几乎融入自然。曲面微有张力，像山的轮廓——曲率有变化但过渡平稳。比例追求稳健：肩宽:车高 ≈ 1.2:1。',
+            'shan.design.safety.title': '安全是最大的诗意',
+            'shan.design.safety.text': '全系标配刀片电池。全系标配L2+主动安全。安全不分高低配。家庭用车的第一首诗是守护——这是凌驾于一切设计原则之上的原则。',
+            'shan.spec.range': '续航里程', 'shan.spec.seats': '全排舒适', 'shan.spec.charge': '30-80%充电', 'shan.spec.ad': '城市NOA', 'shan.spec.platform': '平台',
+            'shan.price': '¥25万 – 35万',
+            'yue.type': '旗舰轿车', 'yue.name': '诗 · 月',
+            'yue.slogan': '从容之诗——进去时疲惫，出来时充盈。',
+            'yue.img1': '概念设计', 'yue.img2': '水墨格栅', 'yue.img3': '格栅微距', 'yue.img4': '行政座舱',
+            'yue.eye.label': '诗眼', 'yue.eye.name': '水墨格栅',
+            'yue.eye.desc': '参数化水墨纹理主动进气格栅——每个角度光影不同，像一幅活的水墨画。墨纹从中心向两侧"散开"，像一滴墨落在水中。5-7种标准墨纹单元无限组合，每辆车独一无二。格栅开合时纹理变化——美有功能。这是"能量流动的可视化"。',
+            'yue.design.philosophy.title': '设计哲学',
+            'yue.design.philosophy.text': '黛色车身——接近墨色，带微紫或深蓝底调。像一位穿着得体的绅士：从容、不可测。比例追求庄严：长:高 ≈ 1.8:1。全系列最精致的曲面——微妙的曲率变化产生如水面波纹般丰富的光影。300年设计寿命：不使用任何会过时的科技风格元素。',
+            'yue.design.cabin.title': '行政座舱',
+            'yue.design.cabin.text': '主动降噪营造极致安静。独立行政座椅支持最大仰角。空气悬架自适应路况。座舱是移动的书房与冥想室——一个会移动的"自己的房间"。陶瓷涂层漆面温润如玉。',
+            'yue.spec.range': '续航里程', 'yue.spec.charge': '30-80%充电', 'yue.spec.ad': '全场景NOA', 'yue.spec.suspension': '自适应悬架', 'yue.spec.anc': '主动降噪',
+            'yue.price': '¥35万 – 50万',
+            'price.range': '价格区间',
+            'manifesto': '"我们相信，最好的技术是<em>无感的</em>。<br>最好的设计是让人<em>安静的</em>。<br>最好的服务是<em>不需要被想起的</em>。<br><br>这就是诗——不是做加法，是做减法。<br>减到最后，留下的就是真正重要的东西。"',
+            'brand.statement': '澄心科技"诗"系列不是一条产品线——它是一个宣言。在喧嚣的时代，我们选择安静。在过剩的时代，我们选择克制。在人工智能的时代，我们选择真正的理解。每一根线条、每一个曲面、每一种材质选择，都服务于一个问题：这让人更安心了吗？',
+            'footer': '澄硅科技 · 2026'
+        },
+        ja: {
+            'nav.back': '← ホーム',
+            'hero.badge': 'ClarHeart モーターズ · コンセプト',
+            'hero.title': '<em>詩</em>シリーズ',
+            'hero.sub': '抑制の中の驚き。信頼の中の感動。簡潔の中の深み。最少の資源で、最深の体験を。',
+            'nav.feng': '詩 · 風', 'nav.shan': '詩 · 山', 'nav.yue': '詩 · 月',
+            'feng.type': '都市セダン', 'feng.name': '詩 · 風',
+            'feng.slogan': '無感の詩——すべてはあなたが思う前に起こる。',
+            'feng.img1': 'コンセプト', 'feng.img2': '夕暮れ走行', 'feng.img3': '夜間光帯', 'feng.img4': 'スクリーンレス内装',
+            'feng.eye.label': '詩眼', 'feng.eye.name': '光帯',
+            'feng.eye.desc': '3-5mmのLEDストリップをウェストラインに織り込み、人間の心拍リズム（60-80bpm）で呼吸。低速時は瞑想のような緩やかな呼吸、高速時は駆け出すような速い呼吸。停止時も微かな明滅——眠る生き物のように。',
+            'feng.design.philosophy.title': 'デザイン哲学',
+            'feng.design.philosophy.text': '東洋の余白美学と現代工学の融合。ボディはきれいな行書のような——リズムがあるが派手ではない。すべての曲面はG2連続：光の移行は柔らかく渐进。',
+            'feng.design.interior.title': '内装原則',
+            'feng.design.interior.text': '引き算：物理ボタンの80%を撤廃、5-7個の触感あるノブを残す。ダッシュボードにスクリーンなし。HUD投影。暖色調、触感優先素材。',
+            'feng.spec.range': '航続距離', 'feng.spec.charge': '30-80%充電', 'feng.spec.ad': '高速パイロット', 'feng.spec.platform': 'プラットフォーム',
+            'feng.price': '¥180,000 – 250,000',
+            'shan.type': 'ファミリーSUV', 'shan.name': '詩 · 山',
+            'shan.slogan': '守護の詩——家族のすべてのニーズを静かにケア。',
+            'shan.img1': 'コンセプト', 'shan.img2': '山間環境', 'shan.img3': '家族湖畔', 'shan.img4': '天幕星空',
+            'shan.eye.label': '詩眼', 'shan.eye.name': '天幕',
+            'shan.eye.desc': '全面電気クロミックガラスのサンルーフ。透明から半透明の星空へ。3列すべてをカバー。3列目の子供も星空を見上げられる。',
+            'shan.design.philosophy.title': 'デザイン哲学',
+            'shan.design.philosophy.text': '移動する山——安定した、保護的で、地に足のついた。竹青色のボディが自然に溶け込む。',
+            'shan.design.safety.title': '安全は最大の詩',
+            'shan.design.safety.text': '全グレードにブレードバッテリー標準装備。L2+アクティブセーフティ標準。安全にグレード差なし。',
+            'shan.spec.range': '航続距離', 'shan.spec.seats': '全列快適', 'shan.spec.charge': '30-80%充電', 'shan.spec.ad': '都市NOA', 'shan.spec.platform': 'プラットフォーム',
+            'shan.price': '¥250,000 – 350,000',
+            'yue.type': 'フラグシップセダン', 'yue.name': '詩 · 月',
+            'yue.slogan': '从容の詩——疲れて入り、満たされて出る。',
+            'yue.img1': 'コンセプト', 'yue.img2': '水墨グリル', 'yue.img3': 'グリルマクロ', 'yue.img4': 'エグゼクティブキャビン',
+            'yue.eye.label': '詩眼', 'yue.eye.name': '水墨グリル',
+            'yue.eye.desc': 'パラメトリック水墨テクスチャのアクティブグリル——角度ごとに光と影が異なる、生きた水墨画のように。',
+            'yue.design.philosophy.title': 'デザイン哲学',
+            'yue.design.philosophy.text': '黛色——墨色に近い、深い紫のアンダートーン。品格ある紳士のように。300年のデザイン寿命。',
+            'yue.design.cabin.title': 'エグゼクティブキャビン',
+            'yue.design.cabin.text': 'アクティブノイズキャンセレーションが深い静寂を創出。独立エグゼクティブシート。エアサスペンション。移動する書斎であり瞑想室。',
+            'yue.spec.range': '航続距離', 'yue.spec.charge': '30-80%充電', 'yue.spec.ad': '全シーンNOA', 'yue.spec.suspension': 'アダプティブサス', 'yue.spec.anc': 'アクティブノイズキャンセル',
+            'yue.price': '¥350,000 – 500,000',
+            'price.range': '価格帯',
+            'manifesto': '"最高の技術は<em>見えない</em>と信じる。<br>最高のデザインは人を<em>静かに</em>させる。<br>最高のサービスは<em>思い出される必要がない</em>。<br><br>これが詩——足し算ではなく、引き算。<br>最後に残るものが、本当に大切なもの。"',
+            'brand.statement': '詩シリーズは製品ラインではない——宣言である。騒音の時代に静けさを、過剰の時代に克制を、AIの時代に真の理解を選ぶ。',
+            'footer': 'ChengSilicon · 2026'
+        },
+        es: {
+            'nav.back': '← Inicio',
+            'hero.badge': 'ChengXin Motors · Concepto',
+            'hero.title': 'Serie <em>Poesía</em>',
+            'hero.sub': 'Sorpresa en la mesura. Emoción en la fiabilidad. Profundidad en la simplicidad. Usando los mínimos recursos para crear las experiencias más profundas.',
+            'nav.feng': '诗 · 风', 'nav.shan': '诗 · 山', 'nav.yue': '诗 · 月',
+            'feng.type': 'Sedán urbano', 'feng.name': '诗 · 风',
+            'feng.slogan': 'El Poema de la Gracia Inadvertida — todo sucede antes de que lo pienses.',
+            'feng.img1': 'Diseño conceptual', 'feng.img2': 'Conducción al atardecer', 'feng.img3': 'Banda de luz nocturna', 'feng.img4': 'Interior sin pantalla',
+            'feng.eye.label': 'Ojo Poético', 'feng.eye.name': 'Banda de Luz',
+            'feng.eye.desc': 'Una tira LED de 3-5mm tejida en la línea de cintura, respirando al ritmo del corazón humano (60-80 lpm). Respiración lenta al crucero, rápida al acelerar. En reposo, un pulso tenue — como una criatura dormida.',
+            'feng.design.philosophy.title': 'Filosofía de diseño',
+            'feng.design.philosophy.text': 'Estética de espacio vacío oriental fusionada con ingeniería moderna. Curvaturas G2 continuas: las transiciones de luz deben ser suaves y graduales.',
+            'feng.design.interior.title': 'Principio interior',
+            'feng.design.interior.text': 'Sustracción: 80% de botones físicos eliminados, 5-7 perillas táctiles retenidas. Sin pantalla en el tablero — información central vía HUD.',
+            'feng.spec.range': 'Autonomía', 'feng.spec.charge': 'Carga 30-80%', 'feng.spec.ad': 'Piloto en autopista', 'feng.spec.platform': 'Plataforma',
+            'feng.price': '¥180,000 – 250,000',
+            'shan.type': 'SUV familiar', 'shan.name': '诗 · 山',
+            'shan.slogan': 'El Poema de la Guardianía — las necesidades de cada familiar, cuidadas en silencio.',
+            'shan.img1': 'Diseño conceptual', 'shan.img2': 'Entorno de montaña', 'shan.img3': 'Lago familiar', 'shan.img4': 'Dosele celestial',
+            'shan.eye.label': 'Ojo Poético', 'shan.eye.name': 'Dosele Celestial',
+            'shan.eye.desc': 'Vidrio electrocrómico de techo completo. Cubre las tres filas. Un niño en la tercera fila puede ver las estrellas.',
+            'shan.design.philosophy.title': 'Filosofía de diseño',
+            'shan.design.philosophy.text': 'Una montaña móvil — estable, protectora, arraigada. Color verde bambú que se funde con el bosque.',
+            'shan.design.safety.title': 'La seguridad es la mayor poesía',
+            'shan.design.safety.text': 'Batería Blade en todos los niveles. Seguridad activa L2+ estándar. Sin descuentos en seguridad.',
+            'shan.spec.range': 'Autonomía', 'shan.spec.seats': 'Confort total', 'shan.spec.charge': 'Carga 30-80%', 'shan.spec.ad': 'NOA urbano', 'shan.spec.platform': 'Plataforma',
+            'shan.price': '¥250,000 – 350,000',
+            'yue.type': 'Sedán insignia', 'yue.name': '诗 · 月',
+            'yue.slogan': 'El Poema de la Serenidad — entras agotado, sales renovado.',
+            'yue.img1': 'Diseño conceptual', 'yue.img2': 'Parrilla de tinta', 'yue.img3': 'Detalle macro', 'yue.img4': 'Cabina ejecutiva',
+            'yue.eye.label': 'Ojo Poético', 'yue.eye.name': 'Parrilla de Tinta',
+            'yue.eye.desc': 'Textura paramétrica de tinta en la parrilla activa — cada ángulo revela diferente luz y sombra, como una pintura viva.',
+            'yue.design.philosophy.title': 'Filosofía de diseño',
+            'yue.design.philosophy.text': 'Color Dai — casi tinta con tonos púrpura profundos. Como un caballero: sereno, insondable. Vida de diseño de 300 años.',
+            'yue.design.cabin.title': 'Cabina ejecutiva',
+            'yue.design.cabin.text': 'Cancelación activa de ruido. Asientos ejecutivos independientes. Suspensión neumática. Un estudio y cámara de meditación móviles.',
+            'yue.spec.range': 'Autonomía', 'yue.spec.charge': 'Carga 30-80%', 'yue.spec.ad': 'NOA completo', 'yue.spec.suspension': 'Suspensión adaptativa', 'yue.spec.anc': 'Cancelación de ruido',
+            'yue.price': '¥350,000 – 500,000',
+            'price.range': 'Rango de precio',
+            'manifesto': '"Creemos que la mejor tecnología es <em>invisible</em>.<br>El mejor diseño te hace <em>tranquilo</em>.<br>El mejor servicio <em>no necesita ser recordado</em>.<br><br>Esto es Poesía — no sumar, sino restar.<br>Lo que queda es lo que realmente importa."',
+            'brand.statement': 'La Serie Poesía de ChengXin Motors no es una línea de productos — es una declaración. En la era del ruido, elegimos el silencio. En la era del exceso, elegimos la mesura.',
+            'footer': 'ChengSilicon · 2026'
+        }
+    };
+
+    const LANG_NAMES = { en: 'EN', zh: '中文', ja: 'JP', es: 'ES' };
+    let currentLang = localStorage.getItem('chengyi-lang') || 'en';
+
+    function setLang(lang) {
+        if (!I18N[lang]) return;
+        currentLang = lang;
+        localStorage.setItem('chengyi-lang', lang);
+        document.documentElement.lang = lang;
+        document.getElementById('langLabel').textContent = LANG_NAMES[lang];
+        document.querySelectorAll('.lang-option').forEach(el => {
+            el.classList.toggle('active', el.dataset.lang === lang);
+        });
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+        });
+        document.getElementById('langSwitcher').classList.remove('open');
+    }
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+        document.getElementById('langSwitcher').classList.toggle('open');
+    });
+    document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.lang-switcher')) {
+            document.getElementById('langSwitcher').classList.remove('open');
+        }
+    });
+
+    /* ═══ Scroll Animations ═══ */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ═══ Init ═══ */
+    setLang(currentLang);
+    </script>
+</body>
+</html>
